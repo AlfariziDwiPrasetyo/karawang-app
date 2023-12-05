@@ -1,4 +1,6 @@
-import Navbar from "@/components/navbar";
+import Navbar from "@/components/Navbar";
+import "@/styles/globals.css";
+
 import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -12,7 +14,10 @@ export default function AdminLayout({ children }) {
   return (
     <html>
       <body>
-        <main>{children}</main>
+        <main>
+          <Navbar />
+          {children}
+        </main>
       </body>
     </html>
   );
