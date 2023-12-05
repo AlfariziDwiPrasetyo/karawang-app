@@ -6,7 +6,9 @@ const Navbar = () => {
       <div className="container mx-auto flex justify-between items-center py-1 px-6 md:px-0">
         <div className="flex items-center">
           <MdEmail className="text-white mr-2" />
-          <a className="text-white">Karawang@unsika.ac.id</a>
+          <a href="/" className="text-white">
+            Karawang@unsika.ac.id
+          </a>
         </div>
         <div className="flex items-center">
           <input
