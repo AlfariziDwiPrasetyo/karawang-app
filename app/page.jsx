@@ -1,10 +1,10 @@
 import React from "react";
 import Feed from "@/components/Feed";
-import Carousel from "@/components/Carousel";
+import { CarouselComp } from "../components/Carousel";
 const page = () => {
   return (
     <div className="font-bold">
-      <Carousel />
+      <CarouselComp />
       <Feed />
     </div>
   );
