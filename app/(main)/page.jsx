@@ -3,7 +3,7 @@ import Feed from "@/components/Feed";
 const page = () => {
   return (
     <div className="font-bold">
-      <h1>Hello World</h1>
+      <h1>Hello W asdf orld</h1>
       <Feed />
     </div>
   );

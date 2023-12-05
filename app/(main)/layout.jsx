@@ -11,6 +11,7 @@ const RootLayout = ({ children }) => {
     <html>
       <body>
         <NavSearch />
+
         <main>{children}</main>
       </body>
     </html>
