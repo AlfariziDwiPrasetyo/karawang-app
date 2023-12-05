@@ -10,9 +10,10 @@ export const metadata = {
 
 export default function AdminLayout({ children }) {
   return (
-    <>
-      <Navbar />
-      {children}
-    </>
+    <html>
+      <body>
+        <main>{children}</main>
+      </body>
+    </html>
   );
 }
