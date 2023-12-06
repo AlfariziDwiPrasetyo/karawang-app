@@ -12,17 +12,21 @@ export default function Page({ children }) {
   return (
     <div className="flex">
       <Sidebar>
-        <div className="pb-8 border-slate-500 border-b">
+        <div className="mb-7">
           <h1>Admin Panel</h1>
         </div>
 
-        <SidebarMenu />
-        <SidebarMenu />
-        <SidebarMenu />
-        <SidebarMenu />
+        <SidebarMenu className={"mx-6 py-5"} />
+        <SidebarMenu className={"mx-6 py-5"} />
+        <SidebarMenu className={"mx-6 py-5"} />
       </Sidebar>
-      <section className="md:ml-[260px] md:px-20 md:py-6">
-        <Container>COY</Container>
+      <section className="md:ml-[220px] md:px-20 md:py-6">
+        <Container>
+          <nav className="md:block hidden">Dashboard Admin</nav>
+          <section className="md:mt-12">
+            <div>KNT</div>
+          </section>
+        </Container>
       </section>
     </div>
   );
