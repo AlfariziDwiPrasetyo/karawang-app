@@ -1,3 +1,4 @@
+import NavMain from "@/components/NavMain";
 import NavSearch from "@/components/NavSearch";
 import "@/styles/globals.css";
 
@@ -11,7 +12,7 @@ const RootLayout = ({ children }) => {
     <html>
       <body>
         <NavSearch />
-
+        <NavMain />
         <main>{children}</main>
       </body>
     </html>
