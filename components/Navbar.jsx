@@ -21,7 +21,7 @@ export default function NavbarAdmin() {
         </Container>
       </nav>
       <div
-        className={`fixed inset-4 rounded-md p-8 bg-slate-300 overflow-scroll  ${
+        className={`fixed inset-4 md:hidden block bg-white shadow rounded-md p-8 overflow-scroll  ${
           isActive ? "block" : "hidden"
         }`}
       >

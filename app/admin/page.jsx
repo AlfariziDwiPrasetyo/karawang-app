@@ -20,7 +20,7 @@ export default function Page({ children }) {
         <SidebarMenu className={"mx-6 py-5"} />
         <SidebarMenu className={"mx-6 py-5"} />
       </Sidebar>
-      <section className="md:ml-[220px] md:px-20 md:py-6">
+      <section className="md:ml-[220px] text-white min-h-screen md:px-20 md:py-6 bg-[#092635] w-full">
         <Container>
           <nav className="md:block hidden">Dashboard Admin</nav>
           <section className="md:mt-12">
