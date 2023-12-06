@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import NavListMenu from "./NavListMenu";
+import Image from "next/image";
 import {
   Navbar,
   Collapse,
@@ -199,14 +200,7 @@ export default function NavMain() {
   return (
     <Navbar className="mx-auto fixed z-40 top-10 rounded-none w-full px-4 py-2">
       <div className="flex items-center justify-between text-blue-gray-900">
-        <Typography
-          as="a"
-          href="#"
-          variant="h6"
-          className="mr-4 cursor-pointer py-1.5 lg:ml-2"
-        >
-          Material Tailwind
-        </Typography>
+        <Image src="/logo.png" width={50} className="ml-8" height={50} alt="" />
         <div className="hidden lg:block">
           <NavList />
         </div>
