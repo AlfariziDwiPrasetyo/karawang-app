@@ -1,4 +1,5 @@
 import NavMain from "@/components/NavMain";
+
 import NavSearch from "@/components/NavSearch";
 import "@/styles/globals.css";
 
