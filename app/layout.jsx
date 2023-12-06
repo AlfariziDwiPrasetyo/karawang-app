@@ -13,7 +13,7 @@ const RootLayout = ({ children }) => {
       <body>
         <NavSearch />
         <NavMain />
-        <main className="z-0 mt-20">{children}</main>
+        <main className="z-0">{children}</main>
       </body>
     </html>
   );
