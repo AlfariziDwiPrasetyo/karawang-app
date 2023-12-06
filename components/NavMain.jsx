@@ -198,7 +198,11 @@ export default function NavMain() {
   }, []);
 
   return (
-    <Navbar className="mx-auto fixed z-40 top-10 rounded-none w-full px-4 py-2">
+    <Navbar
+      className={`mx-auto fixed ${
+        openNav ? "h-screen lg:h-auto" : ""
+      } overflow-y-auto z-40 top-10 rounded-none w-full px-4 py-2`}
+    >
       <div className="flex items-center justify-between text-blue-gray-900">
         <Image src="/logo.png" width={50} className="ml-8" height={50} alt="" />
         <div className="hidden lg:block">
@@ -219,7 +223,7 @@ export default function NavMain() {
       </div>
       <Collapse open={openNav}>
         <NavList />
-        <div className="flex w-full flex-nowrap items-center gap-2 lg:hidden"></div>
+        <div className="flex w-full h-screen flex-nowrap items-center gap-2 lg:hidden"></div>
       </Collapse>
     </Navbar>
   );
