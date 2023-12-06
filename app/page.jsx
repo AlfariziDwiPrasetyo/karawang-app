@@ -1,7 +1,10 @@
 import React from "react";
-import Feed from "@/components/Feed";
+import getData from "@/components/action";
+import CardFeed from "@/components/CardFeed";
 import { CarouselComp } from "../components/Carousel";
-const page = () => {
+import Feed from "@/components/Feed";
+const page = async () => {
+  const data = await getData();
   return (
     <div className="pt-16">
       <CarouselComp />
