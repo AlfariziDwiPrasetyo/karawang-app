@@ -2,6 +2,7 @@
 import React from "react";
 import NavListMenu from "./NavListMenu";
 import Image from "next/image";
+import Link from "next/link";
 import {
   Navbar,
   Collapse,
@@ -170,6 +171,21 @@ function NavList() {
         content={lembagaKemasyarakatanItems}
         titleItem={"Lembaga Kemasyarakatan"}
       />
+
+      {/* Gallery */}
+      <Link href="/galeri">
+        <Typography
+          as="a"
+          href="#"
+          variant="small"
+          color="blue-gray"
+          className="font-medium"
+        >
+          <ListItem className="flex items-center gap-2 py-2 pr-4">
+            Galeri
+          </ListItem>
+        </Typography>
+      </Link>
 
       {/* Kontak */}
       <Typography
