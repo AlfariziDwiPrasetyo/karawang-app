@@ -131,7 +131,7 @@ function NavList() {
       {/* Beranda */}
       <Typography
         as="a"
-        href="#"
+        href="/"
         variant="small"
         color="blue-gray"
         className="font-medium"
@@ -173,19 +173,17 @@ function NavList() {
       />
 
       {/* Gallery */}
-      <Link href="/galeri">
-        <Typography
-          as="a"
-          href="#"
-          variant="small"
-          color="blue-gray"
-          className="font-medium"
-        >
-          <ListItem className="flex items-center gap-2 py-2 pr-4">
-            Galeri
-          </ListItem>
-        </Typography>
-      </Link>
+      <Typography
+        as="a"
+        href="/galeri"
+        variant="small"
+        color="blue-gray"
+        className="font-medium"
+      >
+        <ListItem className="flex items-center gap-2 py-2 pr-4">
+          Galeri
+        </ListItem>
+      </Typography>
 
       {/* Kontak */}
       <Typography
@@ -220,7 +218,15 @@ export default function NavMain() {
       } overflow-y-auto z-40 top-10 rounded-none w-full px-4 py-2`}
     >
       <div className="flex items-center justify-between text-blue-gray-900">
-        <Image src="/logo.png" width={50} className="ml-8" height={50} alt="" />
+        <Link href="/">
+          <Image
+            src="/logo.png"
+            width={50}
+            className="ml-8"
+            height={50}
+            alt=""
+          />
+        </Link>
         <div className="hidden lg:block">
           <NavList />
         </div>
