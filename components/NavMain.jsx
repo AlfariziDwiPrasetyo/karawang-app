@@ -224,7 +224,7 @@ export default function NavMain() {
   return (
     <Navbar
       className={`fixed ${
-        openNav ? "h-screen lg:h-auto" : ""
+        openNav ? "h-screen" : "h-auto lg:h-20"
       } overflow-y-auto z-40 top-10 rounded-none w-full px-4 py-2`}
     >
       <div className="flex items-center justify-between text-blue-gray-900">
