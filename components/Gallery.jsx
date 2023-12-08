@@ -5,7 +5,7 @@ import Image from "next/image";
 const Gallery = async () => {
   const data = await getData();
   return (
-    <div className="mt-20 pt-16">
+    <div className="mt-10">
       <h1 className="text-center font-bold text-red-800 text-3xl">Galeri</h1>
       <div className="pt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
         {data.map((item, index) => (

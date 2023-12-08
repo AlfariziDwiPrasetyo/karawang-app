@@ -93,21 +93,25 @@ const profileKelurahanItems = [
     title: "Visi Misi",
     description: "Halaman utama website.",
     icon: NewspaperIcon,
+    link: "/visi-misi",
   },
   {
     title: "Geografis dan Penduduk",
     description: "Informasi mengenai profil kelurahan.",
     icon: RectangleGroupIcon,
+    link: "/geografis-dan-penduduk",
   },
   {
     title: "Struktur Pemerintahan",
     description: "Berbagai layanan yang tersedia di kelurahan.",
     icon: TagIcon,
+    link: "/struktur-pemerintahan",
   },
   {
     title: "Sarana Prasarana",
     description: "Berbagai lembaga yang ada di masyarakat.",
     icon: UserGroupIcon,
+    link: "/sarana-prasarana",
   },
 ];
 
