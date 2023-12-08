@@ -3,8 +3,9 @@ import NavSearch from "@/components/NavSearch";
 import "@/styles/globals.css";
 
 export const metadata = {
-  title: "Karawang App",
-  description: "{desc}",
+  title: "Kelurahan Nagasari",
+  description:
+    "Situs web resmi Kelurahan Nagasari merupakan portal online yang menyajikan informasi lengkap dan terkini tentang kehidupan, layanan, serta potensi yang dimiliki oleh kelurahan ini.",
 };
 
 const RootLayout = ({ children }) => {
