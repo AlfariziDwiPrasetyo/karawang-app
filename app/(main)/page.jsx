@@ -9,7 +9,7 @@ const page = async () => {
     <div>
       <CarouselComp />
       <h1 className="font-bold text-center space-x-2 text-3xl mt-20">
-        Kabupaten Karawang
+        Kecamatan Nagasari
       </h1>
       <Feed />
     </div>
