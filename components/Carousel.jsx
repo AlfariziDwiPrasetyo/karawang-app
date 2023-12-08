@@ -9,7 +9,6 @@ export function CarouselComp() {
         src="/banner.jpg"
         alt="image 1"
         className="h-full w-full object-cover"
-        style={{ width: "100%" }}
         width={500}
         height={500}
       />
