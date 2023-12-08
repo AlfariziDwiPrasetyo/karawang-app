@@ -19,13 +19,13 @@ export default function CardFeed({ title, content }) {
         />
       </CardHeader>
       <CardBody>
-        <Typography variant="h5" color="blue-gray" className="mb-2">
+        <Typography variant="h5" className="mb-2 text-red-700">
           {title}
         </Typography>
         <Typography>{content}</Typography>
       </CardBody>
       <CardFooter className="pt-0">
-        <Button>Read More</Button>
+        <Button className="bg-red-700">Read More</Button>
       </CardFooter>
     </Card>
   );
