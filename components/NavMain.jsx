@@ -223,7 +223,7 @@ export default function NavMain() {
 
   return (
     <Navbar
-      className={`mx-auto fixed ${
+      className={`fixed ${
         openNav ? "h-screen lg:h-auto" : ""
       } overflow-y-auto z-40 top-10 rounded-none w-full px-4 py-2`}
     >
