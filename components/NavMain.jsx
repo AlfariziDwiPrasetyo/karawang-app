@@ -96,6 +96,12 @@ const profileKelurahanItems = [
     link: "/visi-misi",
   },
   {
+    title: "Alamat",
+    description: "Halaman utama website.",
+    icon: NewspaperIcon,
+    link: "/alamat",
+  },
+  {
     title: "Geografis dan Penduduk",
     description: "Informasi mengenai profil kelurahan.",
     icon: RectangleGroupIcon,
