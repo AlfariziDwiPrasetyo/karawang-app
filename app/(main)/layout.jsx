@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import NavMain from "@/components/NavMain";
 import NavSearch from "@/components/NavSearch";
 import "@/styles/globals.css";
@@ -15,6 +16,7 @@ const RootLayout = ({ children }) => {
         <NavSearch />
         <NavMain />
         <main className="z-0 pt-16 mt-10">{children}</main>
+        <Footer />
       </body>
     </html>
   );
