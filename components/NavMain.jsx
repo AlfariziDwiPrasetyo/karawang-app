@@ -38,51 +38,67 @@ import {
   UserPlusIcon,
   UserMinusIcon,
 } from "@heroicons/react/24/solid";
+import LayananListMenu from "./LayananListMenu";
 // layanan keluarahan
 const layananKelurahanItems = [
   {
     title: "Surat Pengantaran Penerbitan KTP",
     description: "Halaman utama website.",
+    kategori: "1",
     icon: DocumentTextIcon,
+    subItems: [
+      {
+        name: "item 1",
+        link: "item-1",
+      },
+      {
+        name: "item 2",
+        link: "item-2",
+      },
+      {
+        name: "item 3",
+        link: "item-3",
+      },
+    ],
   },
   {
     title: "Persyaratan Pembuatan Akta Kelahiran",
-    description: "Halaman utama website.",
+    kategori: "1",
     icon: UserPlusIcon,
   },
   {
     title: "Persyaratan Pembuatan Akta Kematian",
-    description: "Halaman utama website.",
+    kategori: "1",
     icon: UserMinusIcon,
   },
   {
     title: "Persyaratan Pembuatan KTP hilang/rusak",
-    description: "Halaman utama website.",
+    kategori: "1",
     icon: ClipboardDocumentIcon,
   },
   {
     title: "Persyaratan Pembuatan KK hilang/rusak",
-    description: "Halaman utama website.",
+    kategori: "2",
     icon: NewspaperIcon,
   },
   {
     title: "Persyaratan Perubahan Biodata",
-    description: "Halaman utama website.",
+    kategori: "2",
     icon: UserGroupIcon,
   },
   {
     title: "Persyaratan Pindah Datang",
-    description: "Halaman utama website.",
+    kategori: "2",
     icon: DocumentPlusIcon,
   },
   {
     title: "Persyaratan Pindah Keluar",
-    description: "Halaman utama website.",
+    kategori: "2",
     icon: DocumentMinusIcon,
   },
   {
     title: "Persyaratan Pembuatan Ahli Waris",
-    description: "Halaman utama website.",
+    kategori: "2",
     icon: NewspaperIcon,
   },
 ];
@@ -91,31 +107,26 @@ const layananKelurahanItems = [
 const profileKelurahanItems = [
   {
     title: "Visi Misi",
-    description: "Halaman utama website.",
     icon: NewspaperIcon,
     link: "/visi-misi",
   },
   {
     title: "Alamat",
-    description: "Halaman utama website.",
     icon: NewspaperIcon,
     link: "/alamat",
   },
   {
     title: "Geografis dan Penduduk",
-    description: "Informasi mengenai profil kelurahan.",
     icon: RectangleGroupIcon,
     link: "/geografis-dan-penduduk",
   },
   {
     title: "Struktur Pemerintahan",
-    description: "Berbagai layanan yang tersedia di kelurahan.",
     icon: TagIcon,
     link: "/struktur-pemerintahan",
   },
   {
     title: "Sarana Prasarana",
-    description: "Berbagai lembaga yang ada di masyarakat.",
     icon: UserGroupIcon,
     link: "/sarana-prasarana",
   },
@@ -171,9 +182,9 @@ function NavList() {
       </Typography>
 
       {/* Layanan kelurahan */}
-      <NavListMenu
-        content={layananKelurahanItems}
+      <LayananListMenu
         titleItem={"Layanan Kelurahan"}
+        content={layananKelurahanItems}
       />
 
       {/* lembaga kemasyarakatan */}

@@ -1,52 +1,24 @@
 "use client";
 import React from "react";
-import Link from "next/link";
+import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/24/solid";
 import {
-  Navbar,
-  Collapse,
-  Typography,
-  Button,
-  IconButton,
-  List,
-  ListItem,
   Menu,
   MenuHandler,
   MenuList,
   MenuItem,
+  Button,
+  Typography,
+  ListItem,
+  Collapse,
 } from "@material-tailwind/react";
-import {
-  ChevronDownIcon,
-  Bars3Icon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
+import { RenderItems } from "./RenderItemLayanan";
 
-function NavListMenu({ content, titleItem }) {
+export default function LayananListMenu({ titleItem, content }) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
-  const renderItems = content.map(({ icon, title, link }, key) => (
-    <a href={link} key={key}>
-      <MenuItem className="flex items-center gap-3 rounded-lg">
-        <div className="flex items-center justify-center rounded-lg !bg-blue-gray-50 p-2 ">
-          {React.createElement(icon, {
-            strokeWidth: 2,
-            className: "h-6 text-gray-900 w-6",
-          })}
-        </div>
-        <div>
-          <Typography
-            variant="h6"
-            color="blue-gray"
-            className="flex items-center text-sm font-bold"
-          >
-            {title}
-          </Typography>
-        </div>
-      </MenuItem>
-    </a>
-  ));
 
   return (
-    <React.Fragment>
+    <>
       <Menu
         open={isMenuOpen}
         handler={setIsMenuOpen}
@@ -78,15 +50,18 @@ function NavListMenu({ content, titleItem }) {
           </Typography>
         </MenuHandler>
         <MenuList className="hidden max-w-screen-xl rounded-xl lg:block">
-          <ul className=" gap-y-2 outline-none outline-0">{renderItems}</ul>
+          {content.map((item, key) => (
+            <RenderItems item={item} key={key} />
+          ))}
         </MenuList>
       </Menu>
-
       <div className="block lg:hidden">
-        <Collapse open={isMobileMenuOpen}>{renderItems}</Collapse>
+        <Collapse open={isMobileMenuOpen}>
+          {content.map((item, key) => (
+            <RenderItems item={item} key={key} />
+          ))}
+        </Collapse>
       </div>
-    </React.Fragment>
+    </>
   );
 }
-
-export default NavListMenu;
