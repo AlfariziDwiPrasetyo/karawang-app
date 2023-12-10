@@ -45,6 +45,7 @@ export async function POST(request) {
       {
         success: false,
         message: "Some error occured",
+        msg: err.message,
       },
       { status: 500 }
     );
