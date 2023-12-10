@@ -48,6 +48,12 @@ export async function GET(request) {
       id: true,
       name: true,
       slug: true,
+      Layanan: {
+        select: {
+          name: true,
+          slug: true,
+        },
+      },
     },
   });
 

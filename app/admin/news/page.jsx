@@ -52,7 +52,7 @@ export default function Page() {
       console.log(get);
     };
     fetchData();
-  }, []);
+  }, [isUploaded]);
 
   const handlerImg = (e) => {
     e.preventDefault();
