@@ -5,15 +5,12 @@ import SidebarMenu from "@/components/SidebarMenu";
 import { Inter, Open_Sans } from "next/font/google";
 import prisma from "@/helper/prismaInit";
 import Container from "@/components/Container";
-import CKeditor from "@/components/CKeditor";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   Button,
   Card,
   CardBody,
-  CardFooter,
-  IconButton,
   Input,
   Typography,
 } from "@material-tailwind/react";
@@ -21,58 +18,29 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-const TABLE_HEAD = ["Image", ""];
-
-const TABLE_ROWS = [
-  {
-    name: "John Michael",
-  },
-  {
-    name: "Alexa Liras",
-  },
-];
-
-const inter = Inter({ subsets: ["latin"] });
-
 export default function Page({ params }) {
-  const [dataForm, setDataForm] = useState({});
   const [isUploaded, setIsUploaded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const [oldBanner, setOldBanner] = useState("");
   const router = useRouter();
-
-  const [editorLoaded, setEditorLoaded] = useState(false);
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
   // const [isMount, setIsMount] = useState(true);
-
-  const imgRef = useRef(null);
-
-  const fileRef = useRef(null);
-
-  useEffect(() => {
-    setEditorLoaded(true);
-  }, []);
+  const [name, setName] = useState("");
+  const [slug, setSlug] = useState("");
 
   useEffect(() => {
     setIsUploaded(false);
     const fetchData = async () => {
       try {
-        const get = await axios.get(`/api/news/${params.id}`);
+        console.log(params.slug);
+        const get = await axios.get(`/api/categoryLayanan/${params.slug}`);
+
         if (get.data.data !== null) {
-          setOldBanner(get.data.data.publicId);
-          setTitle(get.data.data.title);
-          setContent(get.data.data.content);
-        }
-
-        if (imgRef.current) {
-          imgRef.current.hidden = false;
-
-          imgRef.current.src = get.data.data.url;
+          setName(get.data.data.name);
+          setSlug(get.data.data.slug);
         }
       } catch (err) {
         router.push("/404");
+
         console.log(err);
       }
     };
@@ -80,47 +48,25 @@ export default function Page({ params }) {
     // setIsMount(false);
   }, [isUploaded]);
 
-  const handlerImg = (e) => {
-    e.preventDefault();
-    const [file] = e.target.files;
-
-    if (file) {
-      imgRef.current.hidden = false;
-
-      imgRef.current.src = URL.createObjectURL(file);
-
-      setDataForm((v) => {
-        return {
-          ...v,
-          file,
-        };
-      });
-    }
-  };
-
   const handlerSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     const data = new FormData();
-    data.append("file", dataForm["file"]);
-    data.append("oldFile", oldBanner);
-    data.append("title", title);
-
-    data.append("content", content);
+    data.append("name", name);
+    data.append("slug", slug);
     try {
-      const post = await axios.put(`/api/news/${params.id}`, data);
+      const post = await axios.put(`/api/categoryLayanan/${params.slug}`, data);
       if (post.data.success) {
-        imgRef.current.src = "#";
-        imgRef.current.hidden = true;
+        setName("");
+        setSlug("");
         setIsUploaded(true);
       }
     } catch (err) {
       console.log(err.response);
     }
 
-    fileRef.current.value = "";
     setIsLoading(false);
-    router.push("/admin/news");
+    router.push("/admin/categoryLayanan");
   };
   // if (isMount) return null;
   return (
@@ -163,62 +109,37 @@ export default function Page({ params }) {
           )}
           <CardBody>
             <Typography variant="h5" color="blue-gray" className="mb-2">
-              Add Banner
+              Edit Category Layanan
             </Typography>
 
-            <img
-              id="blah"
-              ref={imgRef}
-              src="#"
-              className="mb-4 rounded-lg w-full max-h-[240px] object-cover"
-              hidden
-              alt="your image"
-            />
             <form
               onSubmit={handlerSubmit}
               action=""
               encType="multipart/form-data"
             >
-              <input
-                required
-                ref={fileRef}
-                type="file"
-                accept="image/png, image/jpeg, image/jpg"
-                onChange={handlerImg}
-                className="file-input file-input-bordered w-full max-w-xs"
-              />
+              <input type="hidden" value={slug} />
               <Typography variant="h6" color="blue-gray" className="mt-3">
-                Title
+                Name
               </Typography>
               <Input
                 size="lg"
                 onChange={(e) => {
-                  setTitle(e.target.value);
+                  setName(e.target.value);
+                  const s = e.target.value.toLowerCase().split(" ").join("-");
+                  setSlug(s);
                 }}
-                value={title}
-                placeholder="title"
+                value={name}
+                placeholder="name"
                 className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                 labelProps={{
                   className: "before:content-none after:content-none",
                 }}
               />
-
-              <Typography variant="h6" color="blue-gray" className="mt-3 ">
-                Content
-              </Typography>
-              <CKeditor
-                name="content"
-                onChange={(data) => {
-                  setContent(data);
-                }}
-                editorLoaded={editorLoaded}
-                value={content}
-              />
               <div className="flex gap-3">
                 <Button type="submit" className="block mt-3" color="blue-gray">
                   Submit
                 </Button>
-                <Link href={"/admin/banner"}>
+                <Link href={"/admin/categoryLayanan"}>
                   <Button
                     type="button"
                     className="block mt-3"

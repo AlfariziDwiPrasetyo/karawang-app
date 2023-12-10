@@ -36,7 +36,7 @@ export default function Page({ params }) {
   const [dataForm, setDataForm] = useState({});
   const [isUploaded, setIsUploaded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [banner, setBanner] = useState(null);
+
   const [oldBanner, setOldBanner] = useState("");
   const router = useRouter();
   // const [isMount, setIsMount] = useState(true);
@@ -49,8 +49,10 @@ export default function Page({ params }) {
     const fetchData = async () => {
       try {
         const get = await axios.get(`/api/banner/${params.id}`);
-        setOldBanner(get.data.data.publicId);
-        setBanner(get.data);
+
+        if (get.data.data !== null) {
+          setOldBanner(get.data.data.publicId);
+        }
         if (imgRef.current) {
           imgRef.current.hidden = false;
 
@@ -81,19 +83,6 @@ export default function Page({ params }) {
         };
       });
     }
-  };
-
-  const handlerDelete = async (e) => {
-    setIsLoading(true);
-    const key = e.target.dataset.key;
-    try {
-      const del = await axios.delete(`/api/banner/${key}`);
-      if (del.data.success) {
-        setIsUploaded(true);
-      }
-    } catch (err) {}
-
-    setIsLoading(false);
   };
 
   const handlerSubmit = async (e) => {

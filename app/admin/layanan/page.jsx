@@ -12,6 +12,7 @@ import {
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import CKeditor from "@/components/CKeditor";
+import Link from "next/link";
 
 const TABLE_HEAD = ["Name", "Category", ""];
 
@@ -220,6 +221,11 @@ export default function Page() {
                             </td>
                             <td className="p-4">
                               <div className="flex gap-4 justify-center">
+                                <Link href={`/admin/layanan/${slug}`}>
+                                  <Button key={id} className="" color="green">
+                                    update
+                                  </Button>
+                                </Link>
                                 <Button
                                   data-slug={slug}
                                   key={id}

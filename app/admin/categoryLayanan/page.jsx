@@ -9,6 +9,7 @@ import {
 } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Link from "next/link";
 
 const TABLE_HEAD = ["Name", ""];
 
@@ -168,9 +169,13 @@ export default function Page() {
                           </td>
                           <td className="p-4">
                             <div className="flex gap-4 justify-center">
+                              <Link href={`/admin/categoryLayanan/${slug}`}>
+                                <Button className="" color="green">
+                                  update
+                                </Button>
+                              </Link>
                               <Button
                                 data-slug={slug}
-                                key={id}
                                 className=""
                                 onClick={handlerDelete}
                                 color="red"

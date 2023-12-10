@@ -6,14 +6,25 @@ import cloudinary from "@/helper/cloudinary";
 export const dynamic = "force-dynamic"; // defaults to force-static
 
 export async function GET(request, { params }) {
-  const user = await prisma.post.findFirst({
-    where: { id: parseInt(params.newsId) },
-  });
+  try {
+    const user = await prisma.post.findFirstOrThrow({
+      where: { id: parseInt(params.newsId) },
+    });
 
-  return NextResponse.json({
-    success: true,
-    data: user,
-  });
+    return NextResponse.json({
+      success: true,
+      data: user,
+    });
+  } catch (err) {
+    console.log(err);
+    return NextResponse.json(
+      {
+        success: false,
+        message: "Post doesnt exist",
+      },
+      { status: 404 }
+    );
+  }
 }
 
 export async function PUT(request, { params }) {

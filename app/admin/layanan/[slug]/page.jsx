@@ -15,6 +15,8 @@ import {
   CardFooter,
   IconButton,
   Input,
+  Option,
+  Select,
   Typography,
 } from "@material-tailwind/react";
 import axios from "axios";
@@ -42,14 +44,14 @@ export default function Page({ params }) {
   const [oldBanner, setOldBanner] = useState("");
   const router = useRouter();
 
-  const [editorLoaded, setEditorLoaded] = useState(false);
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const [categoryLayanan, setCategoryLayanan] = useState("");
   // const [isMount, setIsMount] = useState(true);
 
-  const imgRef = useRef(null);
-
-  const fileRef = useRef(null);
+  const [editorLoaded, setEditorLoaded] = useState(false);
+  const [name, setName] = useState("");
+  const [slug, setSlug] = useState("");
+  const [category, setCategory] = useState("");
+  const [content, setContent] = useState("");
 
   useEffect(() => {
     setEditorLoaded(true);
@@ -59,20 +61,18 @@ export default function Page({ params }) {
     setIsUploaded(false);
     const fetchData = async () => {
       try {
-        const get = await axios.get(`/api/news/${params.id}`);
+        const get = await axios.get(`/api/layanan/${params.slug}`);
+        const getLayanan = await axios.get("/api/categoryLayanan");
+
+        setCategoryLayanan(getLayanan.data);
         if (get.data.data !== null) {
-          setOldBanner(get.data.data.publicId);
-          setTitle(get.data.data.title);
+          setCategory(get.data.data.categoryId);
+
+          setName(get.data.data.name);
           setContent(get.data.data.content);
         }
-
-        if (imgRef.current) {
-          imgRef.current.hidden = false;
-
-          imgRef.current.src = get.data.data.url;
-        }
       } catch (err) {
-        router.push("/404");
+        router.push("/not-found");
         console.log(err);
       }
     };
@@ -80,47 +80,31 @@ export default function Page({ params }) {
     // setIsMount(false);
   }, [isUploaded]);
 
-  const handlerImg = (e) => {
-    e.preventDefault();
-    const [file] = e.target.files;
-
-    if (file) {
-      imgRef.current.hidden = false;
-
-      imgRef.current.src = URL.createObjectURL(file);
-
-      setDataForm((v) => {
-        return {
-          ...v,
-          file,
-        };
-      });
-    }
+  const handlerSelect = (value) => {
+    setCategory(value);
   };
 
   const handlerSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     const data = new FormData();
-    data.append("file", dataForm["file"]);
-    data.append("oldFile", oldBanner);
-    data.append("title", title);
 
+    data.append("name", name);
     data.append("content", content);
+    data.append("category", category);
+    data.append("slug", slug);
+
     try {
-      const post = await axios.put(`/api/news/${params.id}`, data);
+      const post = await axios.put(`/api/layanan/${params.slug}`, data);
       if (post.data.success) {
-        imgRef.current.src = "#";
-        imgRef.current.hidden = true;
         setIsUploaded(true);
       }
     } catch (err) {
       console.log(err.response);
     }
 
-    fileRef.current.value = "";
     setIsLoading(false);
-    router.push("/admin/news");
+    router.push("/admin/layanan");
   };
   // if (isMount) return null;
   return (
@@ -166,43 +150,43 @@ export default function Page({ params }) {
               Add Banner
             </Typography>
 
-            <img
-              id="blah"
-              ref={imgRef}
-              src="#"
-              className="mb-4 rounded-lg w-full max-h-[240px] object-cover"
-              hidden
-              alt="your image"
-            />
             <form
               onSubmit={handlerSubmit}
               action=""
               encType="multipart/form-data"
             >
-              <input
-                required
-                ref={fileRef}
-                type="file"
-                accept="image/png, image/jpeg, image/jpg"
-                onChange={handlerImg}
-                className="file-input file-input-bordered w-full max-w-xs"
-              />
+              <input type="hidden" value={slug} />
               <Typography variant="h6" color="blue-gray" className="mt-3">
-                Title
+                Name
               </Typography>
               <Input
                 size="lg"
                 onChange={(e) => {
-                  setTitle(e.target.value);
+                  setName(e.target.value);
+                  const s = e.target.value.toLowerCase().split(" ").join("-");
+                  setSlug(s);
                 }}
-                value={title}
-                placeholder="title"
+                value={name}
+                placeholder="name"
                 className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                 labelProps={{
                   className: "before:content-none after:content-none",
                 }}
               />
 
+              <div className="mt-3">
+                <Select onChange={handlerSelect} label="Category Layanan">
+                  {categoryLayanan ? (
+                    categoryLayanan.data.map(({ id, name, slug }) => (
+                      <Option value={id.toString()} key={id}>
+                        {name}
+                      </Option>
+                    ))
+                  ) : (
+                    <Option>Loading...</Option>
+                  )}
+                </Select>
+              </div>
               <Typography variant="h6" color="blue-gray" className="mt-3 ">
                 Content
               </Typography>
