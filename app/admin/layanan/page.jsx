@@ -1,80 +1,56 @@
 "use client";
-
-import Sidebar from "@/components/Sidebar";
-import SidebarMenu from "@/components/SidebarMenu";
-import { Inter, Open_Sans } from "next/font/google";
-import prisma from "@/helper/prismaInit";
 import Container from "@/components/Container";
-import { useEffect, useRef, useState } from "react";
-
 import {
   Button,
   Card,
   CardBody,
-  CardFooter,
-  IconButton,
+  Input,
+  Option,
+  Select,
   Typography,
 } from "@material-tailwind/react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
+import CKeditor from "@/components/CKeditor";
 
-const TABLE_HEAD = ["Image", ""];
-
-const TABLE_ROWS = [
-  {
-    name: "John Michael",
-  },
-  {
-    name: "Alexa Liras",
-  },
-];
-
-const inter = Inter({ subsets: ["latin"] });
+const TABLE_HEAD = ["Name", "Category", ""];
 
 export default function Page() {
-  const [dataForm, setDataForm] = useState({});
+  //   untuk ketika berhasil aplod, maka refresh agar konten yang baru muncul
   const [isUploaded, setIsUploaded] = useState(false);
+  //   untuk ketika tombol submit dipencet, maka akan muncul icon loading
   const [isLoading, setIsLoading] = useState(false);
-  const [banner, setBanner] = useState(null);
-  // const [isMount, setIsMount] = useState(true);
+  const [layanan, setLayanan] = useState(null);
+  const [categoryLayanan, setCategoryLayanan] = useState(null);
+  //   untuk mengecek jika halaman belum sepenuhnya ter mount
 
-  const imgRef = useRef(null);
-  const fileRef = useRef(null);
+  const [editorLoaded, setEditorLoaded] = useState(false);
+  const [name, setName] = useState("");
+  const [slug, setSlug] = useState("");
+  const [category, setCategory] = useState("");
+  const [content, setContent] = useState("");
+
+  useEffect(() => {
+    setEditorLoaded(true);
+  }, []);
 
   useEffect(() => {
     setIsUploaded(false);
     const fetchData = async () => {
-      const get = await axios.get("/api/banner");
-      setBanner(get.data);
+      const get = await axios.get("/api/layanan");
+      setLayanan(get.data);
+
+      const getLayanan = await axios.get("/api/categoryLayanan");
+      setCategoryLayanan(getLayanan.data);
     };
     fetchData();
-    // setIsMount(false);
   }, [isUploaded]);
-
-  const handlerImg = (e) => {
-    e.preventDefault();
-    const [file] = e.target.files;
-
-    if (file) {
-      imgRef.current.hidden = false;
-
-      imgRef.current.src = URL.createObjectURL(file);
-
-      setDataForm((v) => {
-        return {
-          ...v,
-          file,
-        };
-      });
-    }
-  };
 
   const handlerDelete = async (e) => {
     setIsLoading(true);
-    const key = e.target.dataset.key;
+    const slug = e.target.dataset.slug;
     try {
-      const del = await axios.delete(`/api/banner/${key}`);
+      const del = await axios.delete(`/api/layanan/${slug}`);
       if (del.data.success) {
         setIsUploaded(true);
       }
@@ -83,26 +59,34 @@ export default function Page() {
     setIsLoading(false);
   };
 
+  const handlerSelect = (value) => {
+    setCategory(value);
+  };
+
   const handlerSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     const data = new FormData();
-    data.append("file", dataForm["file"]);
+
+    data.append("name", name);
+    data.append("slug", slug);
+    data.append("category", category);
+    data.append("content", content);
     try {
-      const post = await axios.post("/api/banner", data);
+      const post = await axios.post("/api/layanan", data);
       if (post.data.success) {
-        imgRef.current.src = "#";
-        imgRef.current.hidden = true;
+        console.log(data.get("category"));
+        setName("");
+        setContent("");
+        setCategory("");
         setIsUploaded(true);
       }
     } catch (err) {
       console.log(err.response);
     }
-
-    fileRef.current.value = "";
     setIsLoading(false);
   };
-  // if (isMount) return null;
+
   return (
     <section className="md:ml-[260px] text-white min-h-screen md:px-6 md:py-6 bg-[#092635] w-full">
       <Container>
@@ -111,7 +95,6 @@ export default function Page() {
             DASHBOARD
           </Typography>
         </nav>
-
         <Card className="z-0 mt-6 md:mt-12 w-full relative">
           {isLoading && (
             <div className="absolute inset-0 flex items-center justify-center">
@@ -143,30 +126,58 @@ export default function Page() {
           )}
           <CardBody>
             <Typography variant="h5" color="blue-gray" className="mb-2">
-              Add Banner
+              Add Layanan
             </Typography>
 
-            <img
-              id="blah"
-              ref={imgRef}
-              src="#"
-              className="mb-4 rounded-lg w-full max-h-[240px] object-cover"
-              hidden
-              alt="your image"
-            />
             <form
-              onSubmit={handlerSubmit}
               action=""
+              onSubmit={handlerSubmit}
               encType="multipart/form-data"
             >
-              <input
-                required
-                ref={fileRef}
-                type="file"
-                accept="image/png, image/jpeg, image/jpg"
-                onChange={handlerImg}
-                className="file-input file-input-bordered w-full max-w-xs"
+              <input type="hidden" value={slug} />
+              <Typography variant="h6" color="blue-gray" className="mt-3">
+                Name
+              </Typography>
+              <Input
+                size="lg"
+                onChange={(e) => {
+                  setName(e.target.value);
+                  const s = e.target.value.toLowerCase().split(" ").join("-");
+                  setSlug(s);
+                }}
+                value={name}
+                placeholder="name@mail.com"
+                className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+                labelProps={{
+                  className: "before:content-none after:content-none",
+                }}
               />
+
+              <div className="mt-3">
+                <Select onChange={handlerSelect} label="Category Layanan">
+                  {categoryLayanan ? (
+                    categoryLayanan.data.map(({ id, name, slug }) => (
+                      <Option value={id.toString()} key={id}>
+                        {name}
+                      </Option>
+                    ))
+                  ) : (
+                    <Option>Loading...</Option>
+                  )}
+                </Select>
+              </div>
+              <Typography variant="h6" color="blue-gray" className="mt-3 ">
+                Content
+              </Typography>
+              <CKeditor
+                name="content"
+                onChange={(data) => {
+                  setContent(data);
+                }}
+                editorLoaded={editorLoaded}
+                value={content}
+              />
+
               <Button type="submit" className="block mt-3" color="blue-gray">
                 Submit
               </Button>
@@ -192,43 +203,38 @@ export default function Page() {
                   </tr>
                 </thead>
                 <tbody>
-                  {banner &&
-                    banner.data.map(({ url, id }, index) => {
-                      {
-                        console.log("WOII ini : ", id);
+                  {layanan &&
+                    layanan.data.map(
+                      ({ id, name, slug, LayananCategory }, index) => {
+                        return (
+                          <tr key={id}>
+                            <td className={`p-4`}>
+                              <div className=" w-full h-full flex items-center">
+                                <Typography>{name}</Typography>
+                              </div>
+                            </td>
+                            <td className={`p-4`}>
+                              <div className=" w-full h-full flex items-center">
+                                <Typography>{LayananCategory.name}</Typography>
+                              </div>
+                            </td>
+                            <td className="p-4">
+                              <div className="flex gap-4 justify-center">
+                                <Button
+                                  data-slug={slug}
+                                  key={id}
+                                  className=""
+                                  onClick={handlerDelete}
+                                  color="red"
+                                >
+                                  Delete
+                                </Button>
+                              </div>
+                            </td>
+                          </tr>
+                        );
                       }
-                      const isLast = index === TABLE_ROWS.length - 1;
-                      const classes = isLast
-                        ? "p-4"
-                        : "p-4 border-b border-blue-gray-50";
-
-                      return (
-                        <tr key={id}>
-                          <td className={`${classes}`}>
-                            <div className="w-full  h-[160px] ">
-                              <img
-                                className="object-cover w-full h-full"
-                                src={`${url}`}
-                                alt="card-image"
-                              />
-                            </div>
-                          </td>
-                          <td className={classes}>
-                            <div className="flex gap-4 justify-center">
-                              <Button
-                                data-key={id}
-                                key={id}
-                                className=""
-                                onClick={handlerDelete}
-                                color="red"
-                              >
-                                Delete
-                              </Button>
-                            </div>
-                          </td>
-                        </tr>
-                      );
-                    })}
+                    )}
                 </tbody>
               </table>
             </Card>

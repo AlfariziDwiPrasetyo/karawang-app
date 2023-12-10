@@ -1,4 +1,6 @@
 import Navbar from "@/components/Navbar";
+import Sidebar from "@/components/Sidebar";
+
 import "@/styles/globals.css";
 
 import { Inter } from "next/font/google";
@@ -16,7 +18,10 @@ export default function AdminLayout({ children }) {
       <body>
         <main>
           <Navbar />
-          {children}
+          <div className="flex">
+            <Sidebar />
+            {children}
+          </div>
         </main>
       </body>
     </html>

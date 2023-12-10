@@ -8,24 +8,24 @@ export async function POST(request) {
   try {
     const formData = await request.formData();
     const file = formData.get("file");
-    const uploaded = await moveUploadFile(file, "banner");
+    const uploaded = await moveUploadFile(file, "news");
     // console.log("form data", formData.get("file"));
     console.log(uploaded);
-    const banner = await prisma.banner.create({
+    const post = await prisma.post.create({
       data: {
+        title: formData.get("title"),
+        authorId: 1,
         url: uploaded.url,
-        originName: uploaded.original_filename,
         publicId: uploaded.public_id,
+        content: formData.get("content"),
+        published: true,
       },
     });
 
     return NextResponse.json({
       success: true,
-      message: "Banner success created",
-      data: {
-        url: banner.url,
-        originName: banner.originName,
-      },
+      message: "Post success created",
+      data: post,
     });
   } catch (err) {
     return NextResponse.json(
@@ -39,10 +39,18 @@ export async function POST(request) {
 }
 
 export async function GET(request) {
-  const user = await prisma.banner.findMany();
+  const post = await prisma.post.findMany({
+    select: {
+      id: true,
+      authorId: true,
+      title: true,
+      content: true,
+      url: true,
+    },
+  });
 
   return NextResponse.json({
     success: true,
-    data: user,
+    data: post,
   });
 }

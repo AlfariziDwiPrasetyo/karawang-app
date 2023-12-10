@@ -1,10 +1,29 @@
 /* open sans font */
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body{
-    font-family: 'Open Sans', sans-serif;
+body {
+  font-family: "Open Sans", sans-serif;
+}
+
+.ck.ck-content ul,
+.ck.ck-content ul li {
+  list-style-type: inherit;
+}
+
+.ck.ck-content ul {
+  /* Default user agent stylesheet, you can change it to your needs. */
+  padding-left: 40px;
+}
+
+.ck.ck-content ol,
+.ck.ck-content ol li {
+  list-style-type: decimal;
+}
+.ck.ck-content ol {
+  /* Default user agent stylesheet, you can change it to your needs. */
+  padding-left: 40px;
 }

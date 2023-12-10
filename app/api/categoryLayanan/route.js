@@ -1,33 +1,37 @@
 import moveUploadFile from "@/helper/moveUploadFile";
 import prisma from "@/helper/prismaInit";
 import { NextResponse } from "next/server";
+import { v4 } from "uuid";
 
 export const dynamic = "force-dynamic"; // defaults to force-static
 
 export async function POST(request) {
   try {
     const formData = await request.formData();
-    const file = formData.get("file");
-    const uploaded = await moveUploadFile(file, "banner");
+    let slug = formData.get("slug");
     // console.log("form data", formData.get("file"));
-    console.log(uploaded);
-    const banner = await prisma.banner.create({
+    const getCategoryLayanan = await prisma.layananCategory.findUnique({
+      where: {
+        slug: slug,
+      },
+    });
+    if (getCategoryLayanan) {
+      slug += "-" + v4();
+    }
+    const categoryLayanan = await prisma.layananCategory.create({
       data: {
-        url: uploaded.url,
-        originName: uploaded.original_filename,
-        publicId: uploaded.public_id,
+        name: formData.get("name"),
+        slug: slug,
       },
     });
 
     return NextResponse.json({
       success: true,
-      message: "Banner success created",
-      data: {
-        url: banner.url,
-        originName: banner.originName,
-      },
+      message: "Category Layanan success created",
+      data: categoryLayanan,
     });
   } catch (err) {
+    console.log(err);
     return NextResponse.json(
       {
         success: false,
@@ -39,10 +43,16 @@ export async function POST(request) {
 }
 
 export async function GET(request) {
-  const user = await prisma.banner.findMany();
+  const categoryLayanan = await prisma.layananCategory.findMany({
+    select: {
+      id: true,
+      name: true,
+      slug: true,
+    },
+  });
 
   return NextResponse.json({
     success: true,
-    data: user,
+    data: categoryLayanan,
   });
 }

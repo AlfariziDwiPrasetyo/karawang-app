@@ -4,6 +4,7 @@ import Container from "@/components/Container";
 import { useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import SidebarMenu from "./SidebarMenu";
+import { Typography } from "antd";
 
 export default function NavbarAdmin() {
   const [isActive, setIsActive] = useState(false);
@@ -21,12 +22,15 @@ export default function NavbarAdmin() {
         </Container>
       </nav>
       <div
-        className={`fixed inset-4 md:hidden block bg-white shadow rounded-md p-8 overflow-scroll  ${
+        className={`fixed z-10 inset-4 md:hidden block bg-white shadow rounded-md p-8 overflow-scroll  ${
           isActive ? "block" : "hidden"
         }`}
       >
         <div className="flex justify-between items-center">
-          <h1>ADMIN PAGE</h1>
+          <Typography variant="h1" color="blue-gray" className="text-lg">
+            ADMIN PANEL
+          </Typography>
+
           <button
             onClick={() => setIsActive((v) => !v)}
             className="border p-2 rounded-md"
