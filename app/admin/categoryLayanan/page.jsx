@@ -124,7 +124,7 @@ export default function Page() {
                   setSlug(s);
                 }}
                 value={name}
-                placeholder="name@mail.com"
+                placeholder="name"
                 className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                 labelProps={{
                   className: "before:content-none after:content-none",

@@ -24,10 +24,10 @@ const Sidebar = ({ children }) => {
 
         <ul className="list-none flex-col flex mt-4 gap-4">
           <li>
-            <Link href={"/admin"}>
+            <Link href={"/admin/banner"}>
               <h3
                 className={`${
-                  pathname == "/admin" ? "text-blue-600" : "text-black"
+                  pathname == "/admin/banner" ? "text-blue-600" : "text-black"
                 } text-sm `}
               >
                 BANNNER

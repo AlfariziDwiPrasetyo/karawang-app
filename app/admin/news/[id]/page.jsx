@@ -1,18 +1,27 @@
 "use client";
+
+import Sidebar from "@/components/Sidebar";
+import SidebarMenu from "@/components/SidebarMenu";
+import { Inter, Open_Sans } from "next/font/google";
+import prisma from "@/helper/prismaInit";
 import Container from "@/components/Container";
+import CKeditor from "@/components/CKeditor";
+import { useEffect, useRef, useState } from "react";
+
 import {
   Button,
   Card,
   CardBody,
+  CardFooter,
+  IconButton,
   Input,
   Typography,
 } from "@material-tailwind/react";
-import { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import CKeditor from "@/components/CKeditor";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-const TABLE_HEAD = ["Image", "Title", ""];
+const TABLE_HEAD = ["Image", ""];
 
 const TABLE_ROWS = [
   {
@@ -23,21 +32,23 @@ const TABLE_ROWS = [
   },
 ];
 
-export default function Page() {
-  // handle untuk image file
+const inter = Inter({ subsets: ["latin"] });
+
+export default function Page({ params }) {
   const [dataForm, setDataForm] = useState({});
-  //   untuk ketika berhasil aplod, maka refresh agar konten yang baru muncul
   const [isUploaded, setIsUploaded] = useState(false);
-  //   untuk ketika tombol submit dipencet, maka akan muncul icon loading
   const [isLoading, setIsLoading] = useState(false);
-  const [post, setPost] = useState(null);
-  //   untuk mengecek jika halaman belum sepenuhnya ter mount
+  const [banner, setBanner] = useState(null);
+  const [oldBanner, setOldBanner] = useState("");
+  const router = useRouter();
 
   const [editorLoaded, setEditorLoaded] = useState(false);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  // const [isMount, setIsMount] = useState(true);
 
   const imgRef = useRef(null);
+
   const fileRef = useRef(null);
 
   useEffect(() => {
@@ -47,12 +58,27 @@ export default function Page() {
   useEffect(() => {
     setIsUploaded(false);
     const fetchData = async () => {
-      const get = await axios.get("/api/news");
-      setPost(get.data);
-      console.log(get);
+      try {
+        const get = await axios.get(`/api/news/${params.id}`);
+
+        setOldBanner(get.data.data.publicId);
+        setTitle(get.data.data.title);
+        setContent(get.data.data.content);
+        setBanner(get.data);
+
+        if (imgRef.current) {
+          imgRef.current.hidden = false;
+
+          imgRef.current.src = get.data.data.url;
+        }
+      } catch (err) {
+        // router.push("/404");
+        console.log(err);
+      }
     };
     fetchData();
-  }, []);
+    // setIsMount(false);
+  }, [isUploaded]);
 
   const handlerImg = (e) => {
     e.preventDefault();
@@ -72,33 +98,20 @@ export default function Page() {
     }
   };
 
-  const handlerDelete = async (e) => {
-    setIsLoading(true);
-    const key = e.target.dataset.key;
-    try {
-      const del = await axios.delete(`/api/news/${key}`);
-      if (del.data.success) {
-        setIsUploaded(true);
-      }
-    } catch (err) {}
-
-    setIsLoading(false);
-  };
-
   const handlerSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     const data = new FormData();
     data.append("file", dataForm["file"]);
+    data.append("oldFile", oldBanner);
     data.append("title", title);
+
     data.append("content", content);
     try {
-      const post = await axios.post("/api/news", data);
+      const post = await axios.put(`/api/news/${params.id}`, data);
       if (post.data.success) {
         imgRef.current.src = "#";
         imgRef.current.hidden = true;
-        setTitle("");
-        setContent("");
         setIsUploaded(true);
       }
     } catch (err) {
@@ -107,8 +120,9 @@ export default function Page() {
 
     fileRef.current.value = "";
     setIsLoading(false);
+    router.push("/admin/news");
   };
-
+  // if (isMount) return null;
   return (
     <section className="md:ml-[260px] text-white min-h-screen md:px-6 md:py-6 bg-[#092635] w-full">
       <Container>
@@ -117,6 +131,7 @@ export default function Page() {
             DASHBOARD
           </Typography>
         </nav>
+
         <Card className="z-0 mt-6 md:mt-12 w-full relative">
           {isLoading && (
             <div className="absolute inset-0 flex items-center justify-center">
@@ -148,31 +163,28 @@ export default function Page() {
           )}
           <CardBody>
             <Typography variant="h5" color="blue-gray" className="mb-2">
-              Add News
+              Add Banner
             </Typography>
+
             <img
               id="blah"
               ref={imgRef}
-              onChange={handlerImg}
               src="#"
               className="mb-4 rounded-lg w-full max-h-[240px] object-cover"
               hidden
               alt="your image"
             />
             <form
-              action=""
               onSubmit={handlerSubmit}
+              action=""
               encType="multipart/form-data"
             >
-              <Typography variant="h6" color="blue-gray" className=" ">
-                Image
-              </Typography>
               <input
                 required
                 ref={fileRef}
                 type="file"
-                onChange={handlerImg}
                 accept="image/png, image/jpeg, image/jpg"
+                onChange={handlerImg}
                 className="file-input file-input-bordered w-full max-w-xs"
               />
               <Typography variant="h6" color="blue-gray" className="mt-3">
@@ -202,79 +214,21 @@ export default function Page() {
                 editorLoaded={editorLoaded}
                 value={content}
               />
-
-              <Button type="submit" className="block mt-3" color="blue-gray">
-                Submit
-              </Button>
+              <div className="flex gap-3">
+                <Button type="submit" className="block mt-3" color="blue-gray">
+                  Submit
+                </Button>
+                <Link href={"/admin/banner"}>
+                  <Button
+                    type="button"
+                    className="block mt-3"
+                    color="blue-gray"
+                  >
+                    back
+                  </Button>
+                </Link>
+              </div>
             </form>
-            <Card className="h-full w-full mt-4 overflow-scroll">
-              <table className="w-full min-w-max table-auto text-left">
-                <thead>
-                  <tr>
-                    {TABLE_HEAD.map((head) => (
-                      <th
-                        key={head}
-                        className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
-                      >
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal leading-none opacity-70"
-                        >
-                          {head}
-                        </Typography>
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {post &&
-                    post.data.map(({ url, id, title }, index) => {
-                      return (
-                        <tr key={id}>
-                          <td className={`p-4`}>
-                            <div className="w-full  h-[160px] ">
-                              <img
-                                className="object-cover w-full h-full"
-                                src={`${url}`}
-                                alt="card-image"
-                              />
-                            </div>
-                          </td>
-                          <td className={`p-4`}>
-                            <div className=" w-full h-full flex items-center">
-                              <Typography>{title}</Typography>
-                            </div>
-                          </td>
-                          <td className="p-4">
-                            <div className="flex gap-4 justify-center">
-                              <Link href={`/admin/news/${id}`}>
-                                <Button
-                                  key={id}
-                                  className=""
-                                  type="button"
-                                  color="green"
-                                >
-                                  UPDATE
-                                </Button>
-                              </Link>
-                              <Button
-                                data-key={id}
-                                key={id}
-                                className=""
-                                onClick={handlerDelete}
-                                color="red"
-                              >
-                                Delete
-                              </Button>
-                            </div>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                </tbody>
-              </table>
-            </Card>
           </CardBody>
           {/* <CardFooter className="pt-0">
       <Button>Read More</Button>

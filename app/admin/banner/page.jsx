@@ -194,9 +194,6 @@ export default function Page() {
                 <tbody>
                   {banner &&
                     banner.data.map(({ url, id }, index) => {
-                      {
-                        console.log("WOII ini : ", id);
-                      }
                       const isLast = index === TABLE_ROWS.length - 1;
                       const classes = isLast
                         ? "p-4"
@@ -215,9 +212,13 @@ export default function Page() {
                           </td>
                           <td className={classes}>
                             <div className="flex gap-4 justify-center">
+                              <Link href={`/admin/banner/${id}`}>
+                                <Button className="" color="green">
+                                  update
+                                </Button>
+                              </Link>
                               <Button
                                 data-key={id}
-                                key={id}
                                 className=""
                                 onClick={handlerDelete}
                                 color="red"
