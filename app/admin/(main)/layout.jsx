@@ -4,6 +4,7 @@ import Sidebar from "@/components/Sidebar";
 import "@/styles/globals.css";
 
 import { Inter } from "next/font/google";
+import { NextAuthProvider } from "@/app/providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,13 +17,15 @@ export default function AdminLayout({ children }) {
   return (
     <html>
       <body>
-        <main>
-          <Navbar />
-          <div className="flex">
-            <Sidebar />
-            {children}
-          </div>
-        </main>
+        <NextAuthProvider>
+          <main>
+            <Navbar />
+            <div className="flex">
+              <Sidebar />
+              {children}
+            </div>
+          </main>
+        </NextAuthProvider>
       </body>
     </html>
   );

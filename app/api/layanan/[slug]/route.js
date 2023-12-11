@@ -1,4 +1,7 @@
 import prisma from "@/helper/prismaInit";
+import { authOptions } from "@/lib/auth";
+import { getServerSession } from "next-auth";
+import { getToken } from "next-auth/jwt";
 import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic"; // defaults to force-static
@@ -26,6 +29,17 @@ export async function GET(request, { params }) {
 }
 
 export async function PUT(request, { params }) {
+  const token = await getToken({ req: request });
+
+  if (!token) {
+    return NextResponse.json(
+      {
+        success: false,
+        message: "You are not logged in",
+      },
+      { status: 401 }
+    );
+  }
   try {
     const formData = await request.formData();
 
@@ -60,7 +74,17 @@ export async function PUT(request, { params }) {
 }
 
 export async function DELETE(request, { params }) {
-  console.log(params.slug);
+  const token = await getToken({ req: request });
+
+  if (!token) {
+    return NextResponse.json(
+      {
+        success: false,
+        message: "You are not logged in",
+      },
+      { status: 401 }
+    );
+  }
   try {
     await prisma.layanan.delete({
       where: {

@@ -1,11 +1,24 @@
 import moveUploadFile from "@/helper/moveUploadFile";
 import prisma from "@/helper/prismaInit";
+import { authOptions } from "@/lib/auth";
+import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import { v4 } from "uuid";
 
 export const dynamic = "force-dynamic"; // defaults to force-static
 
 export async function POST(request) {
+  const token = await getToken({ req: request });
+
+  if (!token) {
+    return NextResponse.json(
+      {
+        success: false,
+        message: "You are not logged in",
+      },
+      { status: 401 }
+    );
+  }
   try {
     const formData = await request.formData();
     let slug = formData.get("slug");

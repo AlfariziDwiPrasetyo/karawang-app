@@ -3,6 +3,8 @@ import prisma from "@/helper/prismaInit";
 import { NextResponse } from "next/server";
 import cloudinary from "@/helper/cloudinary";
 
+import { getToken } from "next-auth/jwt";
+
 export const dynamic = "force-dynamic"; // defaults to force-static
 
 export async function GET(request, { params }) {
@@ -28,6 +30,17 @@ export async function GET(request, { params }) {
 }
 
 export async function PUT(request, { params }) {
+  const token = await getToken({ req: request });
+
+  if (!token) {
+    return NextResponse.json(
+      {
+        success: false,
+        message: "You are not logged in",
+      },
+      { status: 401 }
+    );
+  }
   try {
     const formData = await request.formData();
     const file = formData.get("file");
@@ -64,6 +77,27 @@ export async function PUT(request, { params }) {
 }
 
 export async function DELETE(request, { params }) {
+  const token = await getToken({ req: request });
+
+  if (!token) {
+    return NextResponse.json(
+      {
+        success: false,
+        message: "You are not logged in",
+      },
+      { status: 401 }
+    );
+  }
+
+  if (!session) {
+    return NextResponse.json(
+      {
+        status: "fail",
+        message: "You are not logged in",
+      },
+      { status: 401 }
+    );
+  }
   try {
     const banner = await prisma.banner.delete({
       where: {

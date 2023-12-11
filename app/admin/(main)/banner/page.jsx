@@ -1,23 +1,16 @@
 "use client";
 
-import Sidebar from "@/components/Sidebar";
-import SidebarMenu from "@/components/SidebarMenu";
-import { Inter, Open_Sans } from "next/font/google";
-import prisma from "@/helper/prismaInit";
+import { Inter } from "next/font/google";
+
+import { LogoutButton } from "@/components/Buttons";
 import Container from "@/components/Container";
 import { useEffect, useRef, useState } from "react";
 
-import {
-  Button,
-  Card,
-  CardBody,
-  CardFooter,
-  IconButton,
-  Typography,
-} from "@material-tailwind/react";
+import { Button, Card, CardBody, Typography } from "@material-tailwind/react";
 import axios from "axios";
-import { usePathname } from "next/navigation";
+
 import Link from "next/link";
+import { signOut } from "next-auth/react";
 
 const TABLE_HEAD = ["Image", ""];
 
@@ -106,10 +99,18 @@ export default function Page() {
   return (
     <section className="md:ml-[260px] text-white min-h-screen md:px-6 md:py-6 bg-[#092635] w-full">
       <Container>
-        <nav className="md:block hidden">
+        <nav className="md:flex justify-between items-center hidden ">
           <Typography variant="h1" color="white" className="text-base">
             DASHBOARD
           </Typography>
+          <Button
+            variant="outlined"
+            color="white"
+            onClick={() => signOut({ callbackUrl: "/" })}
+            className="p-2"
+          >
+            Log out
+          </Button>
         </nav>
 
         <Card className="z-0 mt-6 md:mt-12 w-full relative">

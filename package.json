@@ -2,6 +2,9 @@
   "name": "karawang-app",
   "version": "0.1.0",
   "private": true,
+  "prisma": {
+    "seed": "node prisma/seed.js"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -16,8 +19,10 @@
     "@prisma/client": "^5.7.0",
     "antd": "^5.12.1",
     "axios": "^1.6.2",
+    "bcrypt": "^5.1.1",
     "cloudinary": "^1.41.0",
     "next": "^14.0.3",
+    "next-auth": "^4.24.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.12.0",

@@ -37,7 +37,7 @@ model Post {
   published Boolean   @default(false)
   Comment   Comment[]
   authorId  Int
-  User      User      @relation(fields: [authorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  User      User      @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 model LayananCategory {
@@ -72,7 +72,7 @@ model Comment {
 
 model User {
   id        Int      @id @default(autoincrement())
-  username  String   @db.VarChar(255)
+  username  String   @unique @db.VarChar(255)
   email     String   @unique @db.VarChar(255)
   password  String   @db.VarChar(255)
   createdAt DateTime @default(now()) @db.Timestamp(6)
