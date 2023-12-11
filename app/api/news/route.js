@@ -27,7 +27,7 @@ export async function POST(request) {
     const post = await prisma.post.create({
       data: {
         title: formData.get("title"),
-        authorId: 1,
+        authorId: token.id,
         url: uploaded.url,
         publicId: uploaded.public_id,
         content: formData.get("content"),
@@ -41,6 +41,7 @@ export async function POST(request) {
       data: post,
     });
   } catch (err) {
+    console.log(err.message);
     return NextResponse.json(
       {
         success: false,
@@ -52,7 +53,21 @@ export async function POST(request) {
 }
 
 export async function GET(request) {
+  let page = request.nextUrl.searchParams.get("page");
+  if (!page) {
+    page = 1;
+  }
+
+  if (page < 1 || isNaN(page)) {
+    return NextResponse.json({
+      success: true,
+      data: [],
+    });
+  }
+
   const post = await prisma.post.findMany({
+    take: parseInt(process.env.PAGINATION_POST),
+    skip: (parseInt(page) - 1) * parseInt(process.env.PAGINATION_POST),
     select: {
       id: true,
       authorId: true,

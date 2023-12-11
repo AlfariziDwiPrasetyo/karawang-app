@@ -2,6 +2,7 @@ import moveUploadFile from "@/helper/moveUploadFile";
 import prisma from "@/helper/prismaInit";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
+import { getToken } from "next-auth/jwt";
 import { NextResponse } from "next/server";
 import { v4 } from "uuid";
 

@@ -7,6 +7,7 @@ import { NextResponse } from "next/server";
 export const dynamic = "force-dynamic"; // defaults to force-static
 
 export async function GET(request, { params }) {
+  console.log("+===== : ", params.slug);
   try {
     const layananCategory = await prisma.layananCategory.findFirstOrThrow({
       where: { slug: params.slug },

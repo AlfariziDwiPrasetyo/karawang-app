@@ -1,16 +1,14 @@
 "use client";
 
 import { signIn, signOut } from "next-auth/react";
+import { Button } from "@material-tailwind/react";
 import Link from "next/link";
 
 export const LoginButton = () => {
   return (
-    <button
-      style={{ marginRight: 10 }}
-      onClick={() => signIn("credentials", { callbackUrl: "/admin/banner" })}
-    >
+    <Button onClick={() => signIn({ callbackUrl: "/admin/banner" })}>
       Sign in
-    </button>
+    </Button>
   );
 };
 

@@ -89,15 +89,6 @@ export async function DELETE(request, { params }) {
     );
   }
 
-  if (!session) {
-    return NextResponse.json(
-      {
-        status: "fail",
-        message: "You are not logged in",
-      },
-      { status: 401 }
-    );
-  }
   try {
     const banner = await prisma.banner.delete({
       where: {
