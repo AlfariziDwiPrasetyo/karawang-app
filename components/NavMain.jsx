@@ -1,8 +1,9 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import NavListMenu from "./NavListMenu";
 import Image from "next/image";
 import Link from "next/link";
+import { getLayananData } from "@/utils/getLayananData";
 import {
   Navbar,
   Collapse,
@@ -22,100 +23,37 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import {
-  Bars4Icon,
-  GlobeAmericasIcon,
   NewspaperIcon,
-  PhoneIcon,
   RectangleGroupIcon,
-  SquaresPlusIcon,
-  SunIcon,
   TagIcon,
   UserGroupIcon,
-  DocumentTextIcon,
-  DocumentPlusIcon,
-  DocumentMinusIcon,
-  ClipboardDocumentIcon,
-  UserPlusIcon,
-  UserMinusIcon,
 } from "@heroicons/react/24/solid";
-// layanan keluarahan
-const layananKelurahanItems = [
-  {
-    title: "Surat Pengantaran Penerbitan KTP",
-    description: "Halaman utama website.",
-    icon: DocumentTextIcon,
-  },
-  {
-    title: "Persyaratan Pembuatan Akta Kelahiran",
-    description: "Halaman utama website.",
-    icon: UserPlusIcon,
-  },
-  {
-    title: "Persyaratan Pembuatan Akta Kematian",
-    description: "Halaman utama website.",
-    icon: UserMinusIcon,
-  },
-  {
-    title: "Persyaratan Pembuatan KTP hilang/rusak",
-    description: "Halaman utama website.",
-    icon: ClipboardDocumentIcon,
-  },
-  {
-    title: "Persyaratan Pembuatan KK hilang/rusak",
-    description: "Halaman utama website.",
-    icon: NewspaperIcon,
-  },
-  {
-    title: "Persyaratan Perubahan Biodata",
-    description: "Halaman utama website.",
-    icon: UserGroupIcon,
-  },
-  {
-    title: "Persyaratan Pindah Datang",
-    description: "Halaman utama website.",
-    icon: DocumentPlusIcon,
-  },
-  {
-    title: "Persyaratan Pindah Keluar",
-    description: "Halaman utama website.",
-    icon: DocumentMinusIcon,
-  },
-  {
-    title: "Persyaratan Pembuatan Ahli Waris",
-    description: "Halaman utama website.",
-    icon: NewspaperIcon,
-  },
-];
+import LayananListMenu from "./LayananListMenu";
 
 // profile kelurahan items
 const profileKelurahanItems = [
   {
     title: "Visi Misi",
-    description: "Halaman utama website.",
     icon: NewspaperIcon,
     link: "/visi-misi",
   },
   {
     title: "Alamat",
-    description: "Halaman utama website.",
     icon: NewspaperIcon,
     link: "/alamat",
   },
   {
     title: "Geografis dan Penduduk",
-    description: "Informasi mengenai profil kelurahan.",
     icon: RectangleGroupIcon,
     link: "/geografis-dan-penduduk",
   },
   {
     title: "Struktur Pemerintahan",
-    description: "Berbagai layanan yang tersedia di kelurahan.",
     icon: TagIcon,
     link: "/struktur-pemerintahan",
   },
   {
     title: "Sarana Prasarana",
-    description: "Berbagai lembaga yang ada di masyarakat.",
     icon: UserGroupIcon,
     link: "/sarana-prasarana",
   },
@@ -136,6 +74,22 @@ const lembagaKemasyarakatanItems = [
 ];
 
 function NavList() {
+  const [layananKelurahanItems, setLayananKelurahanItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchLayananKelurahanData = async () => {
+      try {
+        const data = await getLayananData();
+        setLayananKelurahanItems(data);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchLayananKelurahanData();
+  }, []);
+
   return (
     <List className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1">
       {/* Beranda */}
@@ -171,9 +125,10 @@ function NavList() {
       </Typography>
 
       {/* Layanan kelurahan */}
-      <NavListMenu
-        content={layananKelurahanItems}
+      <LayananListMenu
         titleItem={"Layanan Kelurahan"}
+        content={layananKelurahanItems}
+        loading={loading}
       />
 
       {/* lembaga kemasyarakatan */}
@@ -223,8 +178,8 @@ export default function NavMain() {
 
   return (
     <Navbar
-      className={`mx-auto fixed ${
-        openNav ? "h-screen lg:h-auto" : ""
+      className={`fixed ${
+        openNav ? "h-screen" : "h-auto lg:h-20"
       } overflow-y-auto z-40 top-10 rounded-none w-full px-4 py-2`}
     >
       <div className="flex items-center justify-between text-blue-gray-900">

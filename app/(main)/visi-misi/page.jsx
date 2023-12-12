@@ -2,7 +2,7 @@ import React from "react";
 
 const page = () => {
   return (
-    <div className="mt-10 px-10">
+    <div className="mt-10 px-10 h-screen">
       <h1 className="text-2xl font-bold">VISI</h1>
       <h3 className="p-5">
         terwujudnya tata kelola kelurahan yang baik,bersih dan sehat guna

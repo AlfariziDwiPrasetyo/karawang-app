@@ -1,5 +1,5 @@
 import React from "react";
-import getData from "./action";
+import getData from "./NewsData";
 import Image from "next/image";
 
 const Gallery = async () => {
