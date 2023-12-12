@@ -22,14 +22,15 @@ export const RegisterButton = () => {
   );
 };
 
-export const LogoutButton = () => {
+export const LogoutButton = ({ variant, color }) => {
   return (
-    <button
-      style={{ marginRight: 10 }}
+    <Button
+      variant={variant}
+      color={color}
       onClick={() => signOut({ callbackUrl: "/" })}
     >
       Sign Out
-    </button>
+    </Button>
   );
 };
 

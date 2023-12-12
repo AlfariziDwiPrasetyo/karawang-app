@@ -8,7 +8,7 @@ export default function NavAdmin() {
       <Typography variant="h1" color="white" className="text-base">
         DASHBOARD
       </Typography>
-      <LogoutButton />
+      <LogoutButton color={"white"} />
       {/* <Button
         variant="outlined"
         color="white"

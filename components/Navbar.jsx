@@ -1,12 +1,27 @@
 "use client";
 import { RxHamburgerMenu } from "react-icons/rx";
 import Container from "@/components/Container";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import SidebarMenu from "./SidebarMenu";
 import { Typography } from "antd";
+import { LogoutButton } from "./Buttons";
+import { Open_Sans } from "next/font/google";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+const openSans = Open_Sans({
+  style: "normal",
+  weight: ["400", "300", "500"],
+  subsets: ["cyrillic"],
+});
 
 export default function NavbarAdmin() {
+  useEffect(() => {
+    setIsActive(false);
+  }, []);
+
+  const pathname = usePathname();
   const [isActive, setIsActive] = useState(false);
   return (
     <>
@@ -18,7 +33,14 @@ export default function NavbarAdmin() {
           >
             <RxHamburgerMenu />
           </button>
-          <span className="">ADMIN PAGE</span>
+          <div className="flex gap-4 items-center">
+            <h1
+              className={`${openSans.className} text-blue-gray-700 font-semibold text-sm`}
+            >
+              ADMIN LAYOUT PAGES
+            </h1>
+            <LogoutButton />
+          </div>
         </Container>
       </nav>
       <div
@@ -27,10 +49,11 @@ export default function NavbarAdmin() {
         }`}
       >
         <div className="flex justify-between items-center">
-          <Typography variant="h1" color="blue-gray" className="text-lg">
-            ADMIN PANEL
-          </Typography>
-
+          <h2
+            className={`${openSans.className} text-blue-gray-700 font-semibold`}
+          >
+            ADMIN LAYOUT PAGES
+          </h2>
           <button
             onClick={() => setIsActive((v) => !v)}
             className="border p-2 rounded-md"
@@ -38,11 +61,58 @@ export default function NavbarAdmin() {
             <IoMdClose />
           </button>
         </div>
-        <div className="mt-7">
-          <SidebarMenu className={"py-5"} />
-          <SidebarMenu className={"py-5"} />
-          <SidebarMenu className={"py-5"} />
-        </div>
+        <SidebarMenu className={"mt-4"}>
+          <ul className="list-none flex-col flex mt-4 gap-4">
+            <li>
+              <Link href={"/admin/banner"}>
+                <h3
+                  className={`${
+                    pathname == "/admin/banner" ? "text-blue-600" : "text-black"
+                  } text-sm `}
+                >
+                  BANNNER
+                </h3>
+              </Link>
+            </li>
+            <li>
+              <Link href={"/admin/news"}>
+                <h3
+                  className={`${
+                    pathname == "/admin/news" ? "text-blue-600" : "text-black"
+                  } text-sm `}
+                >
+                  NEWS
+                </h3>
+              </Link>
+            </li>
+            <li>
+              <Link href={"/admin/categoryLayanan"}>
+                <h3
+                  className={`${
+                    pathname == "/admin/categoryLayanan"
+                      ? "text-blue-600"
+                      : "text-black"
+                  } text-sm `}
+                >
+                  CATEGORY LAYANAN
+                </h3>
+              </Link>
+            </li>
+            <li>
+              <Link href={"/admin/layanan"}>
+                <h3
+                  className={`${
+                    pathname == "/admin/layanan"
+                      ? "text-blue-600"
+                      : "text-black"
+                  } text-sm `}
+                >
+                  LAYANAN
+                </h3>
+              </Link>
+            </li>
+          </ul>
+        </SidebarMenu>
       </div>
     </>
   );
