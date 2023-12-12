@@ -15,7 +15,6 @@ const page = ({ params: { id } }) => {
       .then((newsData) => {
         setData(newsData);
         setLoading(false);
-        console.log({ newsData });
       });
   }, [id]);
 

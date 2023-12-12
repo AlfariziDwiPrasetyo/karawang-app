@@ -2,7 +2,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import SpinnerLoad from "./SpinnerLoad";
-import getData from "./NewsData";
 import Card from "./Card";
 
 const Feed = () => {
