@@ -1,23 +1,38 @@
+"use client";
 import React from "react";
-import getData from "./NewsData";
-import Image from "next/image";
+import { useState, useEffect } from "react";
+import SpinnerLoad from "./SpinnerLoad";
 
-const Gallery = async () => {
-  const data = await getData();
-  return (
+const Gallery = () => {
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState({});
+
+  useEffect(() => {
+    const fetchImageData = async () => {
+      const response = await fetch("http://localhost:3000/api/banner");
+      const data = await response.json();
+      setData(data);
+      setLoading(false);
+    };
+    fetchImageData();
+  }, []);
+
+  console.log({ data });
+
+  return loading ? (
+    <div className="mt-10 flex items-center justify-center h-screen">
+      <SpinnerLoad width={12} height={12} />
+    </div>
+  ) : (
     <div className="mt-10">
       <h1 className="text-center font-bold text-red-800 text-3xl">Galeri</h1>
       <div className="pt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
-        {data.map((item, index) => (
+        {data.data.map((item, index) => (
           <div
             key={index}
             className="relative w-full rounded-md overflow-hidden"
           >
-            <img
-              src={`https://images.unsplash.com/photo-1540553016722-983e48a2cd10?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80}`}
-              alt={`Image ${index + 1}`}
-              layout="fill"
-            />
+            <img src={item.url} alt={`Image ${index + 1}`} layout="fill" />
           </div>
         ))}
       </div>
