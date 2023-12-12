@@ -10,12 +10,14 @@ const DynamicPage = ({ title, content, image }) => {
         <div className="w-full">
           <img src={image} className="w-full object-contain" alt="" />
         </div>
-        <div className=" lg:ml-5 p-3 lg:p-1 ">
-          <h1 className="text-center lg:px-5 lg:text-left font-bold text-3xl lg:text-4xl lg:mt-5">
+        <div className=" lg:ml-5 p-3 lg:p-1">
+          <h1 className="text-center lg:px-5 lg:text-left font-bold text-3xl lg:text-4xl">
             {title}
           </h1>
-          <div></div>
-          <div dangerouslySetInnerHTML={{ __html: content }}></div>
+          <div
+            className="mt-5 text-justify"
+            dangerouslySetInnerHTML={{ __html: content }}
+          ></div>
         </div>
       </div>
     </>

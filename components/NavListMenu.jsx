@@ -26,12 +26,6 @@ function NavListMenu({ content, titleItem }) {
   const renderItems = content.map(({ icon, title, link }, key) => (
     <a href={link} key={key}>
       <MenuItem className="flex items-center gap-3 rounded-lg">
-        <div className="flex items-center justify-center rounded-lg !bg-blue-gray-50 p-2 ">
-          {React.createElement(icon, {
-            strokeWidth: 2,
-            className: "h-6 text-gray-900 w-6",
-          })}
-        </div>
         <div>
           <Typography
             variant="h6"
