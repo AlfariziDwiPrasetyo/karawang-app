@@ -10,11 +10,7 @@ export default withAuth(
       return NextResponse.redirect(new URL("/api/auth/signin", request.url));
     }
 
-    if (
-      session &&
-      (request.nextUrl.pathname === "/admin" ||
-        request.nextUrl.pathname === "/api/auth/signin")
-    ) {
+    if (session && request.nextUrl.pathname === "/admin") {
       return NextResponse.redirect(new URL("/admin/banner", request.url));
     }
 

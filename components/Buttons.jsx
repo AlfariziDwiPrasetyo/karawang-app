@@ -6,7 +6,9 @@ import Link from "next/link";
 
 export const LoginButton = () => {
   return (
-    <Button onClick={() => signIn({ callbackUrl: "/admin/banner" })}>
+    <Button
+      onClick={() => signIn("credentials", { callbackUrl: "/admin/banner" })}
+    >
       Sign in
     </Button>
   );

@@ -1,5 +1,6 @@
 import { Button, Typography } from "@material-tailwind/react";
-import { signOut } from "next-auth/react";
+// import { signOut } from "next-auth/react";
+import { LogoutButton } from "@/components/Buttons";
 
 export default function NavAdmin() {
   return (
@@ -7,14 +8,15 @@ export default function NavAdmin() {
       <Typography variant="h1" color="white" className="text-base">
         DASHBOARD
       </Typography>
-      <Button
+      <LogoutButton />
+      {/* <Button
         variant="outlined"
         color="white"
         onClick={() => signOut({ callbackUrl: "/" })}
         className="p-2"
       >
         Log out
-      </Button>
+      </Button> */}
     </nav>
   );
 }
