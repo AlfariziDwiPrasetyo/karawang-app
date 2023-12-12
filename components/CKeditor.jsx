@@ -1,5 +1,27 @@
 import React, { useEffect, useState, useRef } from "react";
 
+const editorConfiguration = {
+  toolbar: [
+    "heading",
+    "|",
+    "bold",
+    "italic",
+
+    "bulletedList",
+    "numberedList",
+    "|",
+    "outdent",
+    "indent",
+    "|",
+
+    "blockQuote",
+    "insertTable",
+
+    "undo",
+    "redo",
+  ],
+};
+
 function Editor({ onChange, name, value, editorLoaded }) {
   const editorRef = useRef();
   const { CKEditor, ClassicEditor } = editorRef.current || {};
@@ -17,6 +39,7 @@ function Editor({ onChange, name, value, editorLoaded }) {
         <CKEditor
           type=""
           name={name}
+          config={editorConfiguration}
           editor={ClassicEditor}
           data={value}
           onChange={(event, editor) => {
