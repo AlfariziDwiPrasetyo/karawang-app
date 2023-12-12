@@ -4,7 +4,7 @@ import { withAuth, NextRequestWithAuth } from "next-auth/middleware";
 export default withAuth(
   function middleware(request) {
     const session = request?.nextauth?.token;
-
+    console.log("woi");
     if (request.nextUrl.pathname !== "/admin/") return NextResponse.next();
     if (!session && request.nextUrl.pathname !== "/admin") {
       return NextResponse.redirect(new URL("/api/auth/signin", request.url));
@@ -25,5 +25,5 @@ export default withAuth(
 
 export const config = {
   // matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
-  matcher: ["/admin/:path*", "/api/auth/signin/:path*"],
+  matcher: ["/admin/:path*"],
 };
