@@ -6,7 +6,7 @@
     "seed": "node prisma/seed.js"
   },
   "scripts": {
-    "dev": "next dev",
+    "dev": "npx prisma db seed && next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

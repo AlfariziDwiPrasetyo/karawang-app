@@ -15,7 +15,7 @@ const main = async () => {
     },
   });
 
-  console.log({ user });
+  console.log({ user, pw });
 };
 main()
   .then(async () => {
