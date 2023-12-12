@@ -1,5 +1,5 @@
 import React from "react";
-import getData from "@/components/NewsData";
+import getData from "@/components/GalleryData";
 import { CarouselComp } from "@/components/Carousel";
 import Feed from "@/components/Feed";
 const page = async () => {
