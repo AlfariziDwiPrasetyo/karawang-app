@@ -50,16 +50,20 @@ export default function LayananListMenu({ titleItem, content }) {
           </Typography>
         </MenuHandler>
         <MenuList className="hidden max-w-screen-xl rounded-xl lg:block">
-          {content.map((item, key) => (
-            <RenderItems item={item} key={key} />
-          ))}
+          <div>
+            {content?.data?.map((item, key) => (
+              <RenderItems item={item} key={key} />
+            ))}
+          </div>
         </MenuList>
       </Menu>
       <div className="block lg:hidden">
         <Collapse open={isMobileMenuOpen}>
-          {content.map((item, key) => (
-            <RenderItems item={item} key={key} />
-          ))}
+          <div>
+            {content?.data?.map((item, key) => (
+              <RenderItems item={item} key={key} />
+            ))}
+          </div>
         </Collapse>
       </div>
     </>

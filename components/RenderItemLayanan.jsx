@@ -16,7 +16,7 @@ export const RenderItems = React.forwardRef(({ item }, key) => {
   const [openMenu, setOpenMenu] = React.useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
-  return item.kategori == "1" ? (
+  return item.Layanan?.length !== 0 ? (
     <>
       <Menu
         placement="right-start"
@@ -35,7 +35,7 @@ export const RenderItems = React.forwardRef(({ item }, key) => {
                   selected={openMenu || isMobileMenuOpen}
                   onClick={() => setIsMobileMenuOpen((cur) => !cur)}
                 >
-                  {item.title}
+                  {item.name}
                   <ChevronDownIcon
                     strokeWidth={2.5}
                     className={`hidden h-3 w-3 transition-transform lg:block ${
@@ -54,23 +54,27 @@ export const RenderItems = React.forwardRef(({ item }, key) => {
           </MenuItem>
         </MenuHandler>
         <MenuList>
-          <MenuItem>Nested Item 1</MenuItem>
-          <MenuItem>Nested Item 2</MenuItem>
-          <MenuItem>Nested Item 3</MenuItem>
+          {item.Layanan.map((layanan, key) => (
+            <Link key={key} href={`/layanan/${layanan.slug}`}>
+              <MenuItem key={layanan.id}>{layanan.name}</MenuItem>
+            </Link>
+          ))}
         </MenuList>
       </Menu>
       <div className="block lg:hidden">
         <Collapse open={isMobileMenuOpen}>
           <div className="pl-3">
-            <MenuItem>Nested Item 1</MenuItem>
-            <MenuItem>Nested Item 2</MenuItem>
-            <MenuItem>Nested Item 3</MenuItem>
+            {item.Layanan.map((layanan, key) => (
+              <Link key={key} href={`/layanan/${layanan.slug}`}>
+                <MenuItem>{layanan.name}</MenuItem>
+              </Link>
+            ))}
           </div>
         </Collapse>
       </div>
     </>
   ) : (
-    <a href="">
+    <Link href={`/layanan/${item.slug}`}>
       <MenuItem>
         <div>
           <Typography as="div" variant="small" className="font-medium">
@@ -79,11 +83,11 @@ export const RenderItems = React.forwardRef(({ item }, key) => {
               selected={openMenu || isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen((cur) => !cur)}
             >
-              {item.title}
+              {item.name}
             </ListItem>
           </Typography>
         </div>
       </MenuItem>
-    </a>
+    </Link>
   );
 });

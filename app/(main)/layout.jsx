@@ -11,7 +11,7 @@ export const metadata = {
 
 const RootLayout = ({ children }) => {
   return (
-    <html>
+    <html data-theme="light">
       <body>
         <NavSearch />
         <NavMain />

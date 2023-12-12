@@ -1,8 +1,9 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import NavListMenu from "./NavListMenu";
 import Image from "next/image";
 import Link from "next/link";
+import { getLayananData } from "@/utils/getLayananData";
 import {
   Navbar,
   Collapse,
@@ -22,86 +23,12 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import {
-  Bars4Icon,
-  GlobeAmericasIcon,
   NewspaperIcon,
-  PhoneIcon,
   RectangleGroupIcon,
-  SquaresPlusIcon,
-  SunIcon,
   TagIcon,
   UserGroupIcon,
-  DocumentTextIcon,
-  DocumentPlusIcon,
-  DocumentMinusIcon,
-  ClipboardDocumentIcon,
-  UserPlusIcon,
-  UserMinusIcon,
 } from "@heroicons/react/24/solid";
 import LayananListMenu from "./LayananListMenu";
-// layanan keluarahan
-const layananKelurahanItems = [
-  {
-    title: "Surat Pengantaran Penerbitan KTP",
-    description: "Halaman utama website.",
-    kategori: "1",
-    icon: DocumentTextIcon,
-    subItems: [
-      {
-        name: "item 1",
-        link: "item-1",
-      },
-      {
-        name: "item 2",
-        link: "item-2",
-      },
-      {
-        name: "item 3",
-        link: "item-3",
-      },
-    ],
-  },
-  {
-    title: "Persyaratan Pembuatan Akta Kelahiran",
-    kategori: "1",
-    icon: UserPlusIcon,
-  },
-  {
-    title: "Persyaratan Pembuatan Akta Kematian",
-    kategori: "1",
-    icon: UserMinusIcon,
-  },
-  {
-    title: "Persyaratan Pembuatan KTP hilang/rusak",
-    kategori: "1",
-    icon: ClipboardDocumentIcon,
-  },
-  {
-    title: "Persyaratan Pembuatan KK hilang/rusak",
-    kategori: "2",
-    icon: NewspaperIcon,
-  },
-  {
-    title: "Persyaratan Perubahan Biodata",
-    kategori: "2",
-    icon: UserGroupIcon,
-  },
-  {
-    title: "Persyaratan Pindah Datang",
-    kategori: "2",
-    icon: DocumentPlusIcon,
-  },
-  {
-    title: "Persyaratan Pindah Keluar",
-    kategori: "2",
-    icon: DocumentMinusIcon,
-  },
-  {
-    title: "Persyaratan Pembuatan Ahli Waris",
-    kategori: "2",
-    icon: NewspaperIcon,
-  },
-];
 
 // profile kelurahan items
 const profileKelurahanItems = [
@@ -147,6 +74,21 @@ const lembagaKemasyarakatanItems = [
 ];
 
 function NavList() {
+  const [layananKelurahanItems, setLayananKelurahanItems] = useState([]);
+
+  useEffect(() => {
+    const fetchLayananKelurahanData = async () => {
+      try {
+        const data = await getLayananData();
+        console.log(data);
+        setLayananKelurahanItems(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchLayananKelurahanData();
+  }, []);
+
   return (
     <List className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1">
       {/* Beranda */}
