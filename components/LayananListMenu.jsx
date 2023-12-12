@@ -52,7 +52,7 @@ export default function LayananListMenu({ titleItem, content, loading }) {
         <MenuList className="hidden max-w-screen-xl rounded-xl lg:block">
           {loading ? (
             <div className="flex justify-center items-center">
-              <SpinnerLoad />
+              <SpinnerLoad height={6} widht={6} />
             </div>
           ) : (
             <div>
@@ -67,7 +67,7 @@ export default function LayananListMenu({ titleItem, content, loading }) {
         <Collapse open={isMobileMenuOpen}>
           {loading ? (
             <div className="flex items-center">
-              <SpinnerLoad />
+              <SpinnerLoad height={6} widht={6} />
             </div>
           ) : (
             <div>

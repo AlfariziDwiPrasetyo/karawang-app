@@ -24,7 +24,7 @@ const Feed = () => {
     <div className="flex items-center justify-center">
       {loading ? (
         <div className="mt-10">
-          <SpinnerLoad />
+          <SpinnerLoad width={6} height={6} />
         </div>
       ) : (
         <div className="mt-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-7">
