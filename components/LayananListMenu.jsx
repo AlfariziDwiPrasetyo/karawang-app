@@ -12,11 +12,11 @@ import {
   Collapse,
 } from "@material-tailwind/react";
 import { RenderItems } from "./RenderItemLayanan";
+import SpinnerLoad from "./SpinnerLoad";
 
-export default function LayananListMenu({ titleItem, content }) {
+export default function LayananListMenu({ titleItem, content, loading }) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
-
   return (
     <>
       <Menu
@@ -50,20 +50,32 @@ export default function LayananListMenu({ titleItem, content }) {
           </Typography>
         </MenuHandler>
         <MenuList className="hidden max-w-screen-xl rounded-xl lg:block">
-          <div>
-            {content?.data?.map((item, key) => (
-              <RenderItems item={item} key={key} />
-            ))}
-          </div>
+          {loading ? (
+            <div className="flex justify-center items-center">
+              <SpinnerLoad />
+            </div>
+          ) : (
+            <div>
+              {content?.data?.map((item, key) => (
+                <RenderItems item={item} key={key} />
+              ))}
+            </div>
+          )}
         </MenuList>
       </Menu>
       <div className="block lg:hidden">
         <Collapse open={isMobileMenuOpen}>
-          <div>
-            {content?.data?.map((item, key) => (
-              <RenderItems item={item} key={key} />
-            ))}
-          </div>
+          {loading ? (
+            <div className="flex items-center">
+              <SpinnerLoad />
+            </div>
+          ) : (
+            <div>
+              {content?.data?.map((item, key) => (
+                <RenderItems item={item} key={key} />
+              ))}
+            </div>
+          )}
         </Collapse>
       </div>
     </>

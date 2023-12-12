@@ -75,13 +75,14 @@ const lembagaKemasyarakatanItems = [
 
 function NavList() {
   const [layananKelurahanItems, setLayananKelurahanItems] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchLayananKelurahanData = async () => {
       try {
         const data = await getLayananData();
-        console.log(data);
         setLayananKelurahanItems(data);
+        setLoading(false);
       } catch (error) {
         console.log(error);
       }
@@ -127,6 +128,7 @@ function NavList() {
       <LayananListMenu
         titleItem={"Layanan Kelurahan"}
         content={layananKelurahanItems}
+        loading={loading}
       />
 
       {/* lembaga kemasyarakatan */}

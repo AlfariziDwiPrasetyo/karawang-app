@@ -5,7 +5,7 @@ export default withAuth(
   function middleware(request) {
     const session = request?.nextauth?.token;
 
-    if (request.nextUrl.pathname === "/") return NextResponse.next();
+    if (request.nextUrl.pathname !== "/admin/") return NextResponse.next();
     if (!session && request.nextUrl.pathname !== "/admin") {
       return NextResponse.redirect(new URL("/api/auth/signin", request.url));
     }
