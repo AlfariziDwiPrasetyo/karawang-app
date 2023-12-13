@@ -10,6 +10,9 @@ const page = () => {
         <h1 className="text-2xl font-bold">
           Geografis <span className="font-normal">(perbatasan wilayah)</span>
         </h1>
+        <p className="p-1">
+          Luas Wilayah <span className="font-bold">325.400</span> HA
+        </p>
         <ul className="pt-3 pl-3">
           <li>
             Sebelah utara :{" "}
