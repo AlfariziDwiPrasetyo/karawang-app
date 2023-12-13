@@ -149,6 +149,7 @@ export default function Page({ params }) {
           </Typography>
           <Input
             size="lg"
+            required
             onChange={(e) => {
               setName(e.target.value);
               const s = e.target.value.toLowerCase().split(" ").join("-");

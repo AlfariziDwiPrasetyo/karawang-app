@@ -1,74 +1,59 @@
 "use client";
 
-import Sidebar from "@/components/Sidebar";
-import SidebarMenu from "@/components/SidebarMenu";
-import { Inter, Open_Sans } from "next/font/google";
-import prisma from "@/helper/prismaInit";
-import Container from "@/components/Container";
-import { useEffect, useState } from "react";
-
 import {
+  Alert,
   Button,
   Card,
   CardBody,
   Input,
   Typography,
 } from "@material-tailwind/react";
+import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 import axios from "axios";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
 
-export default function Page({ params }) {
-  const [isUploaded, setIsUploaded] = useState(false);
+export default function Page() {
+  //   untuk ketika tombol submit dipencet, maka akan muncul icon loading
   const [isLoading, setIsLoading] = useState(false);
 
-  const router = useRouter();
-  // const [isMount, setIsMount] = useState(true);
-  const [name, setName] = useState("");
-  const [slug, setSlug] = useState("");
+  // untuk flash message
+  const [message, setMessage] = useState({ msg: null, color: null });
+
+  const [password, setPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+
+  const session = useSession();
 
   useEffect(() => {
-    setIsUploaded(false);
-    const fetchData = async () => {
-      try {
-        console.log(params.slug);
-        const get = await axios.get(`/api/categoryLayanan/${params.slug}`);
-        console.log(get);
-        if (get.data.data !== null) {
-          setName(get.data.data.name);
-          setSlug(get.data.data.slug);
-        }
-      } catch (err) {
-        router.push("/404");
-
-        console.log(err);
-      }
-    };
-    fetchData();
-    // setIsMount(false);
+    setMessage({ msg: null, color: null });
+    console.log("WOI");
   }, []);
 
   const handlerSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     const data = new FormData();
-    data.append("name", name);
-    data.append("slug", slug);
+
     try {
-      const post = await axios.put(`/api/categoryLayanan/${params.slug}`, data);
-      if (post.data.success) {
-        setName("");
-        setSlug("");
-        setIsUploaded(true);
+      const idUser = session.data.user.id;
+      data.append("password", password);
+      data.append("new password", newPassword);
+      const user = await axios.put(`/api/user/password/${idUser}`, data);
+
+      if (user.data.success) {
+        setNewPassword("");
+        setPassword("");
+        setMessage({ msg: user.data.message, color: "green" });
       }
     } catch (err) {
-      console.log(err.response);
+      setMessage({ msg: err.response.data.message, color: "red" });
+      setPassword("");
+      setNewPassword("");
     }
 
     setIsLoading(false);
-    router.push("/admin/categoryLayanan");
   };
-  // if (isMount) return null;
+
   return (
     <Card className="z-0 mt-6 md:mt-12 w-full relative">
       {isLoading && (
@@ -100,40 +85,49 @@ export default function Page({ params }) {
         </div>
       )}
       <CardBody>
+        {message.msg && <Alert color={message.color}>{message.msg}</Alert>}
         <Typography variant="h5" color="blue-gray" className="mb-2">
-          Edit Category Layanan
+          CHANGE PASSWORD
         </Typography>
 
-        <form onSubmit={handlerSubmit} action="" encType="multipart/form-data">
-          <input type="hidden" value={slug} />
+        <form action="" onSubmit={handlerSubmit} encType="multipart/form-data">
           <Typography variant="h6" color="blue-gray" className="mt-3">
-            Name
+            Password
           </Typography>
           <Input
-            required
+            type="password"
             size="lg"
             onChange={(e) => {
-              setName(e.target.value);
-              const s = e.target.value.toLowerCase().split(" ").join("-");
-              setSlug(s);
+              setPassword(e.target.value);
             }}
-            value={name}
-            placeholder="name"
+            value={password}
+            required
+            placeholder="example@gmail.com"
             className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
             labelProps={{
               className: "before:content-none after:content-none",
             }}
           />
-          <div className="flex gap-3">
-            <Button type="submit" className="block mt-3" color="blue-gray">
-              Submit
-            </Button>
-            <Link href={"/admin/categoryLayanan"}>
-              <Button type="button" className="block mt-3" color="blue-gray">
-                back
-              </Button>
-            </Link>
-          </div>
+          <Typography variant="h6" color="blue-gray" className="mt-3">
+            New Password
+          </Typography>
+          <Input
+            type="password"
+            size="lg"
+            onChange={(e) => {
+              setNewPassword(e.target.value);
+            }}
+            value={newPassword}
+            required
+            className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+            labelProps={{
+              className: "before:content-none after:content-none",
+            }}
+          />
+
+          <Button type="submit" className="block mt-3" color="blue-gray">
+            Submit
+          </Button>
         </form>
       </CardBody>
       {/* <CardFooter className="pt-0">

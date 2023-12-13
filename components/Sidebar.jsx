@@ -90,6 +90,19 @@ const Sidebar = ({ children }) => {
               </h3>
             </Link>
           </li>
+          <li>
+            <Link href={"/admin/change-password"}>
+              <h3
+                className={`${
+                  pathname == "/admin/change-password"
+                    ? "text-blue-600"
+                    : "text-black"
+                } text-sm `}
+              >
+                CHANGE PASSWORD
+              </h3>
+            </Link>
+          </li>
         </ul>
       </SidebarMenu>
     </aside>

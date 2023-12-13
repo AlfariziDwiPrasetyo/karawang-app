@@ -107,6 +107,7 @@ export default function Page() {
             Name
           </Typography>
           <Input
+            required
             size="lg"
             onChange={(e) => {
               setName(e.target.value);

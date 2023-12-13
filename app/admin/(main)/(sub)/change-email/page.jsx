@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  Alert,
   Button,
   Card,
   CardBody,
@@ -25,38 +26,43 @@ const TABLE_ROWS = [
 ];
 
 export default function Page() {
-  //   untuk ketika berhasil aplod, maka refresh agar konten yang baru muncul
-  const [isUploaded, setIsUploaded] = useState(false);
   //   untuk ketika tombol submit dipencet, maka akan muncul icon loading
   const [isLoading, setIsLoading] = useState(false);
 
-  //   untuk mengecek jika halaman belum sepenuhnya ter mount
+  // untuk flash message
+  const [message, setMessage] = useState({ msg: null, color: null });
 
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const session = useSession();
 
   useEffect(() => {
-    setIsUploaded(false);
+    setMessage({ msg: null, color: null });
+    console.log("WOI");
   }, []);
 
   const handlerSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     const data = new FormData();
-    data.append("file", dataForm["file"]);
-    data.append("title", title);
-    data.append("content", content);
-    try {
-      const post = await axios.put("/api/user", data);
-      if (post.data.success) {
-        setEmail("");
 
-        setIsUploaded(true);
+    try {
+      const idUser = session.data.user.id;
+      data.append("email", email);
+      data.append("password", password);
+      const user = await axios.put(`/api/user/email/${idUser}`, data);
+
+      if (user.data.success) {
+        setEmail("");
+        setPassword("");
+        setMessage({ msg: user.data.message, color: "green" });
       }
     } catch (err) {
-      console.log(err.response);
+      setMessage({ msg: err.response.data.message, color: "red" });
+      setPassword("");
     }
 
-    fileRef.current.value = "";
     setIsLoading(false);
   };
 
@@ -91,6 +97,7 @@ export default function Page() {
         </div>
       )}
       <CardBody>
+        {message.msg && <Alert color={message.color}>{message.msg}</Alert>}
         <Typography variant="h5" color="blue-gray" className="mb-2">
           CHANGE EMAIL
         </Typography>
@@ -106,7 +113,24 @@ export default function Page() {
               setEmail(e.target.value);
             }}
             value={email}
+            required
             placeholder="example@gmail.com"
+            className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+            labelProps={{
+              className: "before:content-none after:content-none",
+            }}
+          />
+          <Typography variant="h6" color="blue-gray" className="mt-3">
+            Password
+          </Typography>
+          <Input
+            type="password"
+            size="lg"
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+            value={password}
+            required
             className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
             labelProps={{
               className: "before:content-none after:content-none",

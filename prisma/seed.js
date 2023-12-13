@@ -4,7 +4,7 @@ const bcrypt = require("../helper/bcrypt");
 
 const main = async () => {
   const pw = await bcrypt("admin123");
-  console.log(pw);
+
   const user = await prisma.user.upsert({
     where: { email: "admin@gmail.com" },
     update: { email: "admin@gmail.com", username: "admin", password: pw },
