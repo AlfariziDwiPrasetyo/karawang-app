@@ -1,24 +1,15 @@
 "use client";
 import React from "react";
-import Link from "next/link";
 import {
-  Navbar,
   Collapse,
   Typography,
-  Button,
-  IconButton,
-  List,
   ListItem,
   Menu,
   MenuHandler,
   MenuList,
   MenuItem,
 } from "@material-tailwind/react";
-import {
-  ChevronDownIcon,
-  Bars3Icon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
+import { ChevronDownIcon } from "@heroicons/react/24/outline";
 
 function NavListMenu({ content, titleItem }) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
