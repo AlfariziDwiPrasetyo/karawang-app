@@ -1,12 +1,10 @@
 "use client";
 import React from "react";
-import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/24/solid";
+import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import {
   Menu,
   MenuHandler,
   MenuList,
-  MenuItem,
-  Button,
   Typography,
   ListItem,
   Collapse,

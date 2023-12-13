@@ -8,20 +8,11 @@ import {
   Navbar,
   Collapse,
   Typography,
-  Button,
   IconButton,
   List,
   ListItem,
-  Menu,
-  MenuHandler,
-  MenuList,
-  MenuItem,
 } from "@material-tailwind/react";
-import {
-  ChevronDownIcon,
-  Bars3Icon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import {
   NewspaperIcon,
   RectangleGroupIcon,

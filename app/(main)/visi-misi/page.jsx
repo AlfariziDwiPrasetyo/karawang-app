@@ -3,7 +3,7 @@ import React from "react";
 const page = () => {
   return (
     <>
-      <div className="bg-yellow-600 text-white mt-4 p-8 text-3xl">
+      <div className="bg-yellow-600 text-white mt-2 lg:mt-4 p-8 text-3xl">
         Visi Misi
       </div>
       <div className="mt-10 px-10 h-screen">

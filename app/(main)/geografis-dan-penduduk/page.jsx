@@ -3,7 +3,7 @@ import React from "react";
 const page = () => {
   return (
     <>
-      <div className="bg-yellow-600 text-white mt-4 p-8 text-3xl">
+      <div className="bg-yellow-600 text-white mt-2 lg:mt-4 p-8 text-3xl">
         Geografis dan Kependudukan
       </div>
       <div className="mt-5 p-5">
