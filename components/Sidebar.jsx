@@ -71,6 +71,27 @@ const Sidebar = ({ children }) => {
           </li>
         </ul>
       </SidebarMenu>
+      <SidebarMenu className={"py-5"}>
+        <h2 className=" text-blue-gray-700 font-semibold text-sm">
+          ACCOUNT SETTINGS
+        </h2>
+
+        <ul className="list-none flex-col flex mt-4 gap-4">
+          <li>
+            <Link href={"/admin/change-email"}>
+              <h3
+                className={`${
+                  pathname == "/admin/change-email"
+                    ? "text-blue-600"
+                    : "text-black"
+                } text-sm `}
+              >
+                CHANGE EMAIL
+              </h3>
+            </Link>
+          </li>
+        </ul>
+      </SidebarMenu>
     </aside>
   );
 };
