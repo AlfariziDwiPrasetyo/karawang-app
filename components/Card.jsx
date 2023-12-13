@@ -6,7 +6,6 @@ const Card = ({ image, title, content, id }) => {
     tmp.innerHTML = content;
     return tmp.textContent || tmp.innerText || "";
   };
-  console.log(removedTagContent(content).length);
 
   return (
     <div className="max-w-xs rounded overflow-hidden shadow-lg m-4">
@@ -17,7 +16,7 @@ const Card = ({ image, title, content, id }) => {
         <a href={`/artikel/${id}`} className="font-bold text-xl mb-2">
           {title}
         </a>
-        <div className="mt-5 text-justify">
+        <div className="mt-2 text-justify">
           {removedTagContent(content).length > 100 ? (
             <p>{removedTagContent(content).slice(0, 100 - 6) + " ..."}</p>
           ) : (

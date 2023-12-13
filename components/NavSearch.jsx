@@ -2,17 +2,16 @@
 import { MdEmail } from "react-icons/md";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 const NavSearch = () => {
   const [searchValue, setSearchValue] = useState("");
   const router = useRouter();
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
 
-    setSearchValue(e.target.value);
-    console.log(searchValue);
-    router.push("/search");
+    router.push(`/search?q=${searchValue}`);
   };
 
   const keyPressHandle = (e) => {
@@ -31,14 +30,16 @@ const NavSearch = () => {
           </a>
         </div>
         <div className="md:flex hidden items-center">
-          <input
-            type="text"
-            placeholder="Search..."
-            className="bg-red-700 placeholder-white text-white px-3 py-1 rounded-md focus:outline-none"
-            value={searchValue}
-            onChange={(e) => setSearchValue(e.target.value)}
-            onKeyDown={keyPressHandle}
-          />
+          <form action="" onSubmit={handleOnSubmit}>
+            <input
+              type="text"
+              placeholder="Search..."
+              className="bg-red-700 placeholder-white text-white px-3 py-1 rounded-md focus:outline-none"
+              value={searchValue}
+              onChange={(e) => setSearchValue(e.target.value)}
+              onKeyDown={keyPressHandle}
+            />
+          </form>
         </div>
       </div>
     </nav>
