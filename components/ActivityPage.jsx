@@ -3,7 +3,7 @@ import React from "react";
 const DynamicPage = ({ title, content, image }) => {
   return (
     <>
-      <div className="w-full mt-2 lg:mt-4 bg-yellow-600 text-white p-8 text-3xl">
+      <div className="w-full mt-1 lg:mt-4 bg-yellow-600 text-white p-8 text-3xl">
         Kegiatan Keluarahan Nagasari
       </div>
       <h1 className="text-center lg:px-5 mt-10 lg:text-left font-bold text-3xl lg:text-4xl">
