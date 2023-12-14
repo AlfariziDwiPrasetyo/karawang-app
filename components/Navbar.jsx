@@ -70,7 +70,7 @@ export default function NavbarAdmin() {
                     pathname == "/admin/banner" ? "text-blue-600" : "text-black"
                   } text-sm `}
                 >
-                  BANNNER
+                  Gambar
                 </h3>
               </Link>
             </li>
@@ -81,7 +81,7 @@ export default function NavbarAdmin() {
                     pathname == "/admin/news" ? "text-blue-600" : "text-black"
                   } text-sm `}
                 >
-                  NEWS
+                  Artikel
                 </h3>
               </Link>
             </li>
@@ -94,7 +94,7 @@ export default function NavbarAdmin() {
                       : "text-black"
                   } text-sm `}
                 >
-                  CATEGORY LAYANAN
+                  Kategori Layanan
                 </h3>
               </Link>
             </li>
@@ -107,7 +107,7 @@ export default function NavbarAdmin() {
                       : "text-black"
                   } text-sm `}
                 >
-                  LAYANAN
+                  Layanan
                 </h3>
               </Link>
             </li>
@@ -129,7 +129,7 @@ export default function NavbarAdmin() {
                       : "text-black"
                   } text-sm `}
                 >
-                  CHANGE EMAIL
+                  Ganti Email
                 </h3>
               </Link>
             </li>
@@ -142,7 +142,7 @@ export default function NavbarAdmin() {
                       : "text-black"
                   } text-sm `}
                 >
-                  CHANGE PASSWORD
+                  Ganti Password
                 </h3>
               </Link>
             </li>

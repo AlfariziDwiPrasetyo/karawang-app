@@ -15,7 +15,7 @@ const RootLayout = ({ children }) => {
       <body>
         <NavSearch />
         <NavMain />
-        <main className="z-0 pt-16 mt-10">{children}</main>
+        <main className="z-0 pt-16 mt-10 w-full">{children}</main>
         <Footer />
       </body>
     </html>

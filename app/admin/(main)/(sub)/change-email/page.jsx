@@ -101,7 +101,7 @@ export default function Page() {
       <CardBody>
         {message.msg && <Alert color={message.color}>{message.msg}</Alert>}
         <Typography variant="h5" color="blue-gray" className="mb-2">
-          CHANGE EMAIL
+          Ganti Email
         </Typography>
 
         <form action="" onSubmit={handlerSubmit} encType="multipart/form-data">

@@ -98,7 +98,7 @@ export default function Page() {
       )}
       <CardBody>
         <Typography variant="h5" color="blue-gray" className="mb-2">
-          Add Category Layanan
+          Add Kategori Layanan
         </Typography>
         <form action="" onSubmit={handlerSubmit} encType="multipart/form-data">
           <input type="hidden" value={slug} />

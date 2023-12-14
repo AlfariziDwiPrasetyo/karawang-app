@@ -105,13 +105,13 @@ function NavList() {
       {/* Kegiatan */}
       <Typography
         as="a"
-        href="#"
+        href="/artikel"
         variant="small"
         color="blue-gray"
         className="font-medium"
       >
         <ListItem className="flex items-center gap-2 py-2 pr-4">
-          Kegiatan
+          Artikel
         </ListItem>
       </Typography>
 
@@ -169,7 +169,7 @@ export default function NavMain() {
 
   return (
     <Navbar
-      className={`fixed ${
+      className={`fixed max-w-full ${
         openNav ? "h-screen" : "h-auto lg:h-20"
       } overflow-y-auto z-40 top-10 rounded-none w-full px-4 py-2`}
     >

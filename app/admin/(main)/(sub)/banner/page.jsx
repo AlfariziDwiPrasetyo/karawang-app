@@ -129,7 +129,7 @@ export default function Page() {
       )}
       <CardBody>
         <Typography variant="h5" color="blue-gray" className="mb-2">
-          Add Banner
+          Add Image to Gallery
         </Typography>
 
         <img

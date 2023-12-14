@@ -30,7 +30,7 @@ const Sidebar = ({ children }) => {
                   pathname == "/admin/banner" ? "text-blue-600" : "text-black"
                 } text-sm `}
               >
-                BANNNER
+                Gambar
               </h3>
             </Link>
           </li>
@@ -41,7 +41,7 @@ const Sidebar = ({ children }) => {
                   pathname == "/admin/news" ? "text-blue-600" : "text-black"
                 } text-sm `}
               >
-                NEWS
+                Artikel
               </h3>
             </Link>
           </li>
@@ -54,7 +54,7 @@ const Sidebar = ({ children }) => {
                     : "text-black"
                 } text-sm `}
               >
-                CATEGORY LAYANAN
+                Kategori Layanan
               </h3>
             </Link>
           </li>
@@ -65,7 +65,7 @@ const Sidebar = ({ children }) => {
                   pathname == "/admin/layanan" ? "text-blue-600" : "text-black"
                 } text-sm `}
               >
-                LAYANAN
+                Layanan
               </h3>
             </Link>
           </li>
@@ -86,7 +86,7 @@ const Sidebar = ({ children }) => {
                     : "text-black"
                 } text-sm `}
               >
-                CHANGE EMAIL
+                Ganti Email
               </h3>
             </Link>
           </li>
@@ -99,7 +99,7 @@ const Sidebar = ({ children }) => {
                     : "text-black"
                 } text-sm `}
               >
-                CHANGE PASSWORD
+                Ganti Password
               </h3>
             </Link>
           </li>
