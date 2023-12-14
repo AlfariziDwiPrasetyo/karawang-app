@@ -60,7 +60,6 @@ export default function Page({ params }) {
         }
       } catch (err) {
         router.push("/404");
-        console.log(err);
       }
     };
     fetchData();

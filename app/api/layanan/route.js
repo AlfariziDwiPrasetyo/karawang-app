@@ -23,7 +23,7 @@ export async function POST(request) {
   try {
     const formData = await request.formData();
     let slug = formData.get("slug");
-    // console.log("form data", formData.get("file"));
+
     const getLayanan = await prisma.layanan.findUnique({
       where: {
         slug: slug,

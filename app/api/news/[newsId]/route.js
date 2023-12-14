@@ -46,7 +46,7 @@ export async function PUT(request, { params }) {
     const formData = await request.formData();
     const file = formData.get("file");
     const oldFile = formData.get("oldFile");
-    console.log("INIIi : ", oldFile);
+
     const uploaded = await moveUploadFile(file, "news");
 
     await cloudinary.uploader.destroy(oldFile);

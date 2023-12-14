@@ -19,12 +19,7 @@ model Banner {
   updatedAt  DateTime @updatedAt
 }
 
-model Gallery {
-  id        Int      @id @default(autoincrement())
-  url       String
-  createdAt DateTime @default(now()) @db.Timestamp(6)
-  updatedAt DateTime @updatedAt
-}
+ 
 
 model Post {
   id        Int       @id @default(autoincrement())
@@ -35,7 +30,7 @@ model Post {
   url String
   content   String @db.LongText
   published Boolean   @default(false)
-  Comment   Comment[]
+ 
   authorId  Int
   User      User      @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
@@ -59,17 +54,7 @@ model Layanan {
   createdAt       DateTime        @default(now()) @db.Timestamp(6)
   updatedAt       DateTime        @updatedAt
 }
-
-model Comment {
-  id        Int      @id @default(autoincrement())
-  content   String   @db.Text
-  user      String?  @db.VarChar(255)
-  postId    Int
-  Post      Post     @relation(fields: [postId], references: [id])
-  createdAt DateTime @default(now()) @db.Timestamp(6)
-  updatedAt DateTime @updatedAt
-}
-
+ 
 model User {
   id        Int      @id @default(autoincrement())
   username  String   @unique @db.VarChar(255)
@@ -78,13 +63,6 @@ model User {
   createdAt DateTime @default(now()) @db.Timestamp(6)
   updatedAt DateTime @updatedAt
   Post      Post[]
-
-  // Profile Profile?
+ 
 }
-
-// model Profile {
-//   id     Int     @id @default(autoincrement())
-//   bio    String? 
-//   userId Int     @unique
-//   User   User    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-// }
+ 

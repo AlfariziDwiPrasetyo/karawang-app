@@ -72,8 +72,7 @@ export default function Page({ params }) {
           setContent(get.data.data.content);
         }
       } catch (err) {
-        router.push("/not-found");
-        console.log(err);
+        router.push("/404");
       }
     };
     fetchData();

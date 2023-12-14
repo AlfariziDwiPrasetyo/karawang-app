@@ -26,7 +26,6 @@ export default function Page() {
 
   useEffect(() => {
     setMessage({ msg: null, color: null });
-    console.log("WOI");
   }, []);
 
   const handlerSubmit = async (e) => {

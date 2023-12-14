@@ -46,7 +46,7 @@ export async function PUT(request, { params }) {
     const file = formData.get("file");
     const oldFile = formData.get("oldFile");
     const uploaded = await moveUploadFile(file, "banner");
-    console.log(oldFile);
+
     await cloudinary.uploader.destroy(oldFile);
     const banner = await prisma.banner.update({
       where: {

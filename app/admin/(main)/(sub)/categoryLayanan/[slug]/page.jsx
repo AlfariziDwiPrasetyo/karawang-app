@@ -31,17 +31,14 @@ export default function Page({ params }) {
     setIsUploaded(false);
     const fetchData = async () => {
       try {
-        console.log(params.slug);
         const get = await axios.get(`/api/categoryLayanan/${params.slug}`);
-        console.log(get);
+
         if (get.data.data !== null) {
           setName(get.data.data.name);
           setSlug(get.data.data.slug);
         }
       } catch (err) {
         router.push("/404");
-
-        console.log(err);
       }
     };
     fetchData();

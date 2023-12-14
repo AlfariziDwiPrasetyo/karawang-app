@@ -49,7 +49,6 @@ export default function Page() {
     const fetchData = async () => {
       const get = await axios.get("/api/news");
       setPost(get.data);
-      console.log(get);
     };
     fetchData();
   }, [isUploaded]);

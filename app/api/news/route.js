@@ -22,9 +22,7 @@ export async function POST(request) {
     const formData = await request.formData();
     const file = formData.get("file");
     const uploaded = await moveUploadFile(file, "news");
-    // console.log("form data", formData.get("file"));
 
-    console.log("content : ", formData.get("content"));
     const post = await prisma.post.create({
       data: {
         title: formData.get("title"),

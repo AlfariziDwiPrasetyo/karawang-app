@@ -50,7 +50,7 @@ export default function Page() {
   const handlerDelete = async (e) => {
     setIsLoading(true);
     const slug = e.target.dataset.slug;
-    console.log(slug);
+
     try {
       const del = await axios.delete(`/api/layanan/${slug}`);
       if (del.data.success) {
@@ -77,7 +77,6 @@ export default function Page() {
     try {
       const post = await axios.post("/api/layanan", data);
       if (post.data.success) {
-        console.log(data.get("category"));
         setName("");
         setContent("");
         setCategory("");
