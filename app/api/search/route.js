@@ -21,7 +21,7 @@ export async function POST(request) {
   }
 
   const formData = await request.formData();
-  const file = formData.get("file");
+
   const searchResults = await prisma.$queryRaw`
   SELECT
     'post' AS type,
@@ -29,7 +29,8 @@ export async function POST(request) {
     authorId AS author_id,
     title,
     content,
-    url
+    url,
+    createdAt
   FROM post
   WHERE title LIKE ${`%${formData.get("search")}%`}
   UNION ALL
@@ -39,10 +40,11 @@ export async function POST(request) {
     categoryId AS category_id,
     name,
     content,
-    slug
+    slug,
+    createdAt
   FROM layanan
   WHERE name LIKE ${`%${formData.get("search")}%`}
-  ORDER BY title
+  ORDER BY createdAt DESC
   LIMIT ${parseInt(process.env.PAGINATION_SEARCH)}
   OFFSET ${(parseInt(page) - 1) * parseInt(process.env.PAGINATION_SEARCH)}
 `;
