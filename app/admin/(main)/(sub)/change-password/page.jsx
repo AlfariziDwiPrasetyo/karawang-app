@@ -102,7 +102,7 @@ export default function Page() {
             }}
             value={password}
             required
-            placeholder="example@gmail.com"
+            placeholder="password"
             className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
             labelProps={{
               className: "before:content-none after:content-none",
@@ -114,6 +114,7 @@ export default function Page() {
           <Input
             type="password"
             size="lg"
+            placeholder="new password"
             onChange={(e) => {
               setNewPassword(e.target.value);
             }}

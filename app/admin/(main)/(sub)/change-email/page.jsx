@@ -121,7 +121,7 @@ export default function Page() {
             }}
           />
           <Typography variant="h6" color="blue-gray" className="mt-3">
-            Password
+            Confirmation Password
           </Typography>
           <Input
             type="password"
@@ -131,6 +131,7 @@ export default function Page() {
             }}
             value={password}
             required
+            placeholder="confirmation password"
             className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
             labelProps={{
               className: "before:content-none after:content-none",
