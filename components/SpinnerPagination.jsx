@@ -18,44 +18,43 @@ const SpinnerPagination = () => {
           return res.json();
         })
         .then((newsData) => {
-          setData([...data, newsData]);
-          page++;
+          console.log(newsData);
+          if (newsData.data.length > 0) {
+            setData([...data, newsData]);
+            page++;
+          } else {
+            setIsEnd(true);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          setIsEnd(true);
         });
     }
   }, [inView]);
 
-  useEffect(() => {
-    const isEmpty =
-      Object.keys(data).length === 0 && data.constructor === Object;
-    if (isEmpty) {
-      setIsEnd(true);
-    }
-  }, [data]);
   console.log(data);
 
   return (
     <>
       {data && Object.keys(data).length > 0 && (
         <>
-          {data && Object.keys(data).length > 0 && (
-            <>
-              {Object.keys(data).map(
-                (key) =>
-                  data[key].data &&
-                  data[key].data.length > 0 &&
-                  data[key].data.map((item, index) => (
-                    <Card
-                      key={key}
-                      image={item.url}
-                      title={item.title}
-                      content={item.content}
-                      id={item.id}
-                    />
-                    // You can include other content related to the item here
-                  ))
-              )}
-            </>
-          )}
+          {data &&
+            Object.keys(data).length > 0 &&
+            Object.keys(data).map(
+              (key) =>
+                data[key].data &&
+                data[key].data.length > 0 &&
+                data[key].data.map((item, index) => (
+                  <Card
+                    key={index}
+                    image={item.url}
+                    title={item.title}
+                    content={item.content}
+                    id={item.id}
+                  />
+                ))
+            )}
         </>
       )}
       <section className="flex justify-center items-center w-full">
