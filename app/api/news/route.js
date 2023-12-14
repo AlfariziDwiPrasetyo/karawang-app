@@ -55,9 +55,21 @@ export async function POST(request) {
 export async function GET(request) {
   let page = request.nextUrl.searchParams.get("page");
   if (!page) {
-    page = 1;
-  }
+    const post = await prisma.post.findMany({
+      select: {
+        id: true,
+        authorId: true,
+        title: true,
+        content: true,
+        url: true,
+      },
+    });
 
+    return NextResponse.json({
+      success: true,
+      data: post,
+    });
+  }
   if (page < 1 || isNaN(page)) {
     return NextResponse.json({
       success: true,
