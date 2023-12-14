@@ -44,6 +44,7 @@ export async function PUT(request, { params }) {
 
       data: {
         email: formData.get("email"),
+        secret_key: formData.get("secretKey"),
       },
     });
 

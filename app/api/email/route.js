@@ -9,6 +9,7 @@ export async function POST(request) {
       },
       select: {
         email: true,
+        secret_key: true,
       },
     });
     const transporter = createTransport({
@@ -16,7 +17,7 @@ export async function POST(request) {
       host: "smtp.gmail.com",
       auth: {
         user: user.email,
-        pass: process.env.EMAIL_PASSWORD,
+        pass: user.secret_key,
       },
       secure: true,
     });

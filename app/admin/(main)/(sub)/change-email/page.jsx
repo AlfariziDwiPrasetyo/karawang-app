@@ -34,6 +34,7 @@ export default function Page() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [secretKey, setSecretKey] = useState("");
 
   const session = useSession();
 
@@ -50,11 +51,13 @@ export default function Page() {
       const idUser = session.data.user.id;
       data.append("email", email);
       data.append("password", password);
+      data.append("secretKey", secretKey);
       const user = await axios.put(`/api/user/email/${idUser}`, data);
 
       if (user.data.success) {
         setEmail("");
         setPassword("");
+        setSecretKey("");
         setMessage({ msg: user.data.message, color: "green" });
       }
     } catch (err) {
@@ -112,6 +115,23 @@ export default function Page() {
               setEmail(e.target.value);
             }}
             value={email}
+            required
+            placeholder="example@gmail.com"
+            className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+            labelProps={{
+              className: "before:content-none after:content-none",
+            }}
+          />
+          <Typography variant="h6" color="blue-gray" className="mt-3">
+            Secret Key
+          </Typography>
+          <Input
+            type="text"
+            size="lg"
+            onChange={(e) => {
+              setSecretKey(e.target.value);
+            }}
+            value={secretKey}
             required
             placeholder="example@gmail.com"
             className=" !border-t-blue-gray-200 focus:!border-t-gray-900"

@@ -26,25 +26,25 @@ export async function POST(request) {
   SELECT
     'post' AS type,
     id,
-    authorId AS author_id,
+    "authorId",
     title,
     content,
     url,
-    createdAt
-  FROM post
-  WHERE title LIKE ${`%${formData.get("search")}%`}
+    "createdAt"
+  FROM "Post"
+  WHERE title ILIKE '%' || ${formData.get("search")} || '%'
   UNION ALL
   SELECT
     'layanan' AS type,
     id,
-    categoryId AS category_id,
+    "categoryId",
     name,
     content,
     slug,
-    createdAt
-  FROM layanan
-  WHERE name LIKE ${`%${formData.get("search")}%`}
-  ORDER BY createdAt DESC
+    "createdAt"
+  FROM "Layanan"
+  WHERE name ILIKE '%' || ${formData.get("search")} || '%'
+  ORDER BY "createdAt" DESC
   LIMIT ${parseInt(process.env.PAGINATION_SEARCH)}
   OFFSET ${(parseInt(page) - 1) * parseInt(process.env.PAGINATION_SEARCH)}
 `;
@@ -53,9 +53,13 @@ export async function POST(request) {
 SELECT
   COUNT(*) AS total
 FROM (
-  SELECT id FROM layanan WHERE name LIKE ${`%${formData.get("search")}%`}
+  SELECT id FROM "Layanan" WHERE name ILIKE '%' || ${formData.get(
+    "search"
+  )} || '%'
   UNION ALL
-  SELECT id FROM post WHERE title LIKE ${`%${formData.get("search")}%`}
+  SELECT id FROM "Post" WHERE title ILIKE '%' || ${formData.get(
+    "search"
+  )} || '%'
 ) AS combined
 `;
 
