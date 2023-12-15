@@ -15,6 +15,7 @@ const Feed = () => {
         return res.json();
       })
       .then((newsData) => {
+        console.log(newsData);
         setData(newsData);
         setLoading(false);
       })

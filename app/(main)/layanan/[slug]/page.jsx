@@ -2,8 +2,10 @@
 import React, { useEffect, useState } from "react";
 import SpinnerLoad from "@/components/SpinnerLoad";
 import LayananPage from "@/components/LayananPage";
+import { useRouter } from "next/navigation";
 
 const page = ({ params: { slug } }) => {
+  const router = useRouter();
   const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
 
@@ -13,12 +15,16 @@ const page = ({ params: { slug } }) => {
         return res.json();
       })
       .then((newsData) => {
-        setData(newsData);
+        if (newsData.success) {
+          setData(newsData);
+        } else {
+          router.push("/not-found");
+        }
         setLoading(false);
         console.log({ newsData });
       })
       .catch((error) => {
-        console.log(error);
+        console.log({ error });
       });
   }, [slug]);
 
@@ -27,7 +33,7 @@ const page = ({ params: { slug } }) => {
       <SpinnerLoad width={12} height={12} />
     </div>
   ) : (
-    <LayananPage name={data?.data.name} content={data?.data.content} />
+    <LayananPage name={data?.data?.name} content={data?.data?.content} />
   );
 };
 

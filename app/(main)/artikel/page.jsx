@@ -1,24 +1,55 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useEffect, useState } from "react";
+import SpinnerLoad from "@/components/SpinnerLoad";
+import Card from "@/components/Card";
+import SpinnerPagination from "@/components/SpinnerPagination";
 
-const page = () => {
+const Feed = () => {
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [data, setData] = useState({});
-  console.log(process.env.BASE_URL);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/news`)
-      .then((res) => res.json())
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/news?page=1`)
+      .then((res) => {
+        return res.json();
+      })
       .then((newsData) => {
+        console.log(newsData);
         setData(newsData);
         setLoading(false);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
-  console.log(data);
-
-  return <div>page</div>;
+  return (
+    <>
+      <div className="flex items-center justify-center">
+        {loading ? (
+          <div className="mt-10 h-screen">
+            <SpinnerLoad width={6} height={6} />
+          </div>
+        ) : (
+          <>
+            <div className="mt-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-7">
+              {data.data.map((item, key) => (
+                <Card
+                  key={key}
+                  image={item.url}
+                  title={item.title}
+                  content={item.content}
+                  id={item.id}
+                />
+              ))}
+              <SpinnerPagination />
+            </div>
+          </>
+        )}
+      </div>
+    </>
+  );
 };
 
-export default page;
+export default Feed;

@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export function CarouselComp() {
   return (
-    <Carousel className="hidden lg:flex">
+    <Carousel className="hidden z-0 lg:flex">
       <Image
         src="/banner.jpg"
         alt="image 1"
