@@ -8,7 +8,7 @@ export default async function moveUploadFile(file, folder) {
     const buffer = Buffer.from(bytes);
 
     // const stream = createReadStream(buffer);
-
+    console.log(buffer);
     const theTransformStream = v2.uploader.upload_stream(
       {
         folder: folder,
