@@ -31,7 +31,7 @@ const page = () => {
           <SpinnerLoad width={6} height={6} />
         </div>
       ) : (
-        <div dangerouslySetInnerHTML={{ __html: data.data.content }}></div>
+        <div dangerouslySetInnerHTML={{ __html: data.data?.content }}></div>
       )}
     </>
   );
