@@ -3,11 +3,10 @@ const prisma = new PrismaClient();
 const bcrypt = require("../helper/bcrypt");
 
 const main = async () => {
-  await prisma.user.deleteMany({});
   const pw = await bcrypt("admin123");
 
   await prisma.user.upsert({
-    where: { email: "admin@gmail.com" },
+    where: { username: "admin" },
     update: { email: "admin@gmail.com", username: "admin", password: pw },
     create: {
       email: "admin@gmail.com",
