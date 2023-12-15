@@ -6,7 +6,11 @@ export default async function moveUploadFile(file, folder) {
   const bytes = await file.arrayBuffer();
   const buffer = Buffer.from(bytes);
 
-  const path = join("./temp", new Date().getTime() + "-" + file.name);
+  const path = join(
+    process.cwd(),
+    "temp",
+    new Date().getTime() + "-" + file.name
+  );
   const directory = dirname(path);
 
   // Membuat direktori jika belum ada
