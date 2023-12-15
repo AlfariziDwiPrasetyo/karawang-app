@@ -1,0 +1,69 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Banner {
+  id         Int      @id @default(autoincrement())
+  url        String
+  originName String
+  publicId   String
+  createdAt  DateTime @default(now()) @db.Timestamp(6)
+  updatedAt  DateTime @updatedAt
+}
+
+ 
+
+model Post {
+  id        Int       @id @default(autoincrement())
+  title     String    @db.VarChar(255)
+  createdAt DateTime  @default(now()) @db.Timestamp(6)
+  updatedAt DateTime  @updatedAt
+  publicId   String
+  url String
+  content   String @db.Text
+  published Boolean   @default(false)
+ 
+  authorId  Int
+  User      User      @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model LayananCategory {
+  id        Int       @id @default(autoincrement())
+  name      String    @db.VarChar(255)
+  slug      String    @db.VarChar(255) @unique
+  Layanan   Layanan[]
+  createdAt DateTime  @default(now()) @db.Timestamp(6)
+  updatedAt DateTime  @updatedAt
+}
+
+model Layanan {
+  id              Int             @id @default(autoincrement())
+  name            String          @db.VarChar(255)
+  slug            String          @db.VarChar(255) @unique
+  content         String          @db.Text
+  categoryId      Int
+  LayananCategory LayananCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  createdAt       DateTime        @default(now()) @db.Timestamp(6)
+  updatedAt       DateTime        @updatedAt
+}
+ 
+model User {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique @db.VarChar(255)
+  email     String   @unique @db.VarChar(255)
+  password  String   @db.VarChar(255)
+  secret_key String?
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  updatedAt DateTime @updatedAt
+  Post      Post[]
+ 
+}
+ 

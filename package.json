@@ -2,20 +2,40 @@
   "name": "karawang-app",
   "version": "0.1.0",
   "private": true,
+  "prisma": {
+    "seed": "node prisma/seed.js"
+  },
   "scripts": {
-    "dev": "next dev",
+    "dev": "npx prisma db seed && next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "react": "^18",
-    "react-dom": "^18",
-    "next": "14.0.3"
+    "@ckeditor/ckeditor5-build-classic": "^40.1.0",
+    "@ckeditor/ckeditor5-react": "^6.2.0",
+    "@headlessui/react": "^1.7.17",
+    "@heroicons/react": "^2.0.18",
+    "@material-tailwind/react": "^2.1.5",
+    "@prisma/client": "^5.7.0",
+    "antd": "^5.12.1",
+    "axios": "^1.6.2",
+    "bcrypt": "^5.1.1",
+    "cloudinary": "^1.41.0",
+    "next": "^14.0.3",
+    "next-auth": "^4.24.5",
+    "nodemailer": "^6.9.7",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.12.0",
+    "react-intersection-observer": "^9.5.3",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^10.0.1",
+    "daisyui": "^4.4.19",
     "postcss": "^8",
+    "prisma": "^5.7.0",
     "tailwindcss": "^3.3.0"
   }
 }
