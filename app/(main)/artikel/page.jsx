@@ -4,9 +4,10 @@ import React, { useEffect, useState } from "react";
 const page = () => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState({});
+  console.log(process.env.BASE_URL);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/news")
+    fetch(`http://localhost:3000/api/news`)
       .then((res) => res.json())
       .then((newsData) => {
         setData(newsData);
