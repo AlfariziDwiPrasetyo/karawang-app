@@ -147,7 +147,7 @@ function NavList() {
       {/* Kontak */}
       <Typography
         as="a"
-        href="#"
+        href="/kontak"
         variant="small"
         color="blue-gray"
         className="font-medium"

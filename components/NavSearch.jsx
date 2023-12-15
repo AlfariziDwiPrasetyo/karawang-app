@@ -26,7 +26,7 @@ const NavSearch = () => {
         <div className="flex items-center">
           <MdEmail className="text-white mr-2 hidden md:flex" />
           <a href="/" className="text-white hidden md:flex">
-            Karawang@unsika.ac.id
+            nagasarikarawang@gmail.com
           </a>
         </div>
         <div className="md:flex hidden items-center">

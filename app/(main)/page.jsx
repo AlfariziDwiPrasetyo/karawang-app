@@ -6,7 +6,7 @@ const page = () => {
     <div>
       <CarouselComp />
       <h1 className="font-bold text-center space-x-2 text-3xl mt-20">
-        Kecamatan Nagasari
+        Kelurahan Nagasari
       </h1>
       <Feed />
     </div>
