@@ -8,7 +8,7 @@ const page = ({ params: { id } }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/news/${id}`)
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/news/${id}`)
       .then((res) => {
         return res.json();
       })

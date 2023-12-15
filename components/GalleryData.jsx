@@ -2,7 +2,7 @@
 import Card from "./Card";
 
 const getData = async () => {
-  const response = await fetch(`http://localhost:3000/api/news`);
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/news`);
   const data = await response.json();
   return data.data.map((item, key) => (
     <Card
