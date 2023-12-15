@@ -13,7 +13,7 @@ const SpinnerPagination = () => {
 
   useEffect(() => {
     if (inView) {
-      fetch(`http://localhost:3000/api/news?page=${page}`)
+      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/news?page=${page}`)
         .then((res) => {
           return res.json();
         })
