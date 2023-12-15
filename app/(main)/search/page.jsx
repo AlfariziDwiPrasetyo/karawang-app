@@ -77,7 +77,7 @@ const page = () => {
               Previous page
             </button>
           )}
-          {data.data.length < 5 ? (
+          {data.data.length <= 5 ? (
             <button disabled className="join-item btn ">
               Next
             </button>
