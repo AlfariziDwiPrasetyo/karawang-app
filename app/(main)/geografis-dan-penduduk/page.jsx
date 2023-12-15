@@ -1,234 +1,38 @@
-import React from "react";
+"use client";
+import SpinnerLoad from "@/components/SpinnerLoad";
+import React, { useEffect, useState } from "react";
 
 const page = () => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/penduduk/get`)
+      .then((res) => {
+        return res.json();
+      })
+      .then((newsData) => {
+        console.log(newsData);
+        setData(newsData);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <>
       <div className="bg-yellow-600 text-white mt-2 lg:mt-4 p-8 text-3xl">
         Geografis dan Kependudukan
       </div>
-      <div className="mt-5 p-5">
-        <h1 className="text-2xl font-bold">
-          Geografis <span className="font-normal">(perbatasan wilayah)</span>
-        </h1>
-        <p className="p-1">
-          Luas Wilayah <span className="font-bold">325.400</span> HA
-        </p>
-        <ul className="pt-3 pl-3">
-          <li>
-            Sebelah utara :{" "}
-            <span className="font-bold">Kelurahan Karangpawitan</span>
-          </li>
-          <li>
-            Sebelah Timur : <span className="font-bold">Karawang Wetan</span>
-          </li>
-          <li>
-            Sebelah Selatan : <span className="font-bold">Adiarsa Barat</span>
-          </li>
-          <li>
-            Sebelah Barat : <span className="font-bold">Karawang Kulon</span>
-          </li>
-        </ul>
-        <p className="pt-3 pl-3">
-          Jumlah RW : <span className="font-bold">37</span>{" "}
-        </p>
-        <p className="pt-1 pl-3">
-          Jumlah RT : <span className="font-bold">114</span>
-        </p>
-
-        {/* Kependudukan */}
-        <h1 className="text-2xl pt-3 font-bold">Kependudukan</h1>
-        <p className="pt-5 pl-3">
-          Jumlah Penduduk seluruhnya adalah{" "}
-          <span className="font-bold">19.375</span> jiwa dan{" "}
-          <span className="font-bold">9.272</span> Kepala Keluarga (KK), yang
-          terdiri dari:
-        </p>
-        <ul className="pt-3 pl-3">
-          <li>
-            - Laki Laki : <span className="font-bold">8.838</span> Jiwa
-          </li>
-          <li>
-            - Perempuan : <span className="font-bold">10.537</span> Jiwa
-          </li>
-        </ul>
-        <div className="pl-3 pt-5 mt-10">
-          <h1 className="text-1xl font-bold">
-            Tabel klarifikasi jumlah penduduk
-          </h1>
-          <div className="overflow-x-auto mt-5">
-            <table className="min-w-full border-collapse border border-gray-300">
-              <thead>
-                <tr>
-                  <th className="border border-gray-300 px-4 py-2">
-                    Lingkungan
-                  </th>
-                  <th className="border border-gray-300 px-4 py-2">
-                    Jumlah RW
-                  </th>
-                  <th className="border border-gray-300 px-4 py-2">
-                    Jumlah RT
-                  </th>
-                  <th className="border border-gray-300 px-4 py-2">
-                    Laki-laki
-                  </th>
-                  <th className="border border-gray-300 px-4 py-2">
-                    Perempuan
-                  </th>
-                  <th className="border border-gray-300 px-4 py-2">
-                    Jumlah KK
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="border border-gray-300 px-4 py-2">
-                    Krajan Barat
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2">2</td>
-                  <td className="border border-gray-300 px-4 py-2">6</td>
-                  <td className="border border-gray-300 px-4 py-2">438</td>
-                  <td className="border border-gray-300 px-4 py-2">452</td>
-                  <td className="border border-gray-300 px-4 py-2">334</td>
-                </tr>
-                <tr>
-                  <td className="border border-gray-300 px-4 py-2">
-                    Krajan Timur
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2">2</td>
-                  <td className="border border-gray-300 px-4 py-2">6</td>
-                  <td className="border border-gray-300 px-4 py-2">277</td>
-                  <td className="border border-gray-300 px-4 py-2">467</td>
-                  <td className="border border-gray-300 px-4 py-2">425</td>
-                </tr>
-                <tr>
-                  <td className="border border-gray-300 px-4 py-2">
-                    Sadamalun I
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2">3</td>
-                  <td className="border border-gray-300 px-4 py-2">9</td>
-                  <td className="border border-gray-300 px-4 py-2">754</td>
-                  <td className="border border-gray-300 px-4 py-2">759</td>
-                  <td className="border border-gray-300 px-4 py-2">567</td>
-                </tr>
-                <tr>
-                  <td className="border border-gray-300 px-4 py-2">
-                    Sadamalun III
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2">3</td>
-                  <td className="border border-gray-300 px-4 py-2">7</td>
-                  <td className="border border-gray-300 px-4 py-2">652</td>
-                  <td className="border border-gray-300 px-4 py-2">659</td>
-                  <td className="border border-gray-300 px-4 py-2">459</td>
-                </tr>
-                <tr>
-                  <td className="border border-gray-300 px-4 py-2">
-                    Santiong Selatan
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2">3</td>
-                  <td className="border border-gray-300 px-4 py-2">8</td>
-                  <td className="border border-gray-300 px-4 py-2">310</td>
-                  <td className="border border-gray-300 px-4 py-2">590</td>
-                  <td className="border border-gray-300 px-4 py-2">289</td>
-                </tr>
-                <tr>
-                  <td className="border border-gray-300 px-4 py-2">
-                    Santiong Utara
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2">3</td>
-                  <td className="border border-gray-300 px-4 py-2">7</td>
-                  <td className="border border-gray-300 px-4 py-2">318</td>
-                  <td className="border border-gray-300 px-4 py-2">340</td>
-                  <td className="border border-gray-300 px-4 py-2">251</td>
-                </tr>
-                <tr>
-                  <td className="border border-gray-300 px-4 py-2">
-                    Babakan Cianjur
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2">5</td>
-                  <td className="border border-gray-300 px-4 py-2">15</td>
-                  <td className="border border-gray-300 px-4 py-2">1.241</td>
-                  <td className="border border-gray-300 px-4 py-2">1.235</td>
-                  <td className="border border-gray-300 px-4 py-2">813</td>
-                </tr>
-                <tr>
-                  <td className="border border-gray-300 px-4 py-2">Dipo</td>
-                  <td className="border border-gray-300 px-4 py-2">3</td>
-                  <td className="border border-gray-300 px-4 py-2">9</td>
-                  <td className="border border-gray-300 px-4 py-2">613</td>
-                  <td className="border border-gray-300 px-4 py-2">600</td>
-                  <td className="border border-gray-300 px-4 py-2">745</td>
-                </tr>
-                <tr>
-                  <td className="border border-gray-300 px-4 py-2">
-                    Karang Anyar
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2">3</td>
-                  <td className="border border-gray-300 px-4 py-2">9</td>
-                  <td className="border border-gray-300 px-4 py-2">679</td>
-                  <td className="border border-gray-300 px-4 py-2">691</td>
-                  <td className="border border-gray-300 px-4 py-2">482</td>
-                </tr>
-                <tr>
-                  <td className="border border-gray-300 px-4 py-2">Kepuh</td>
-                  <td className="border border-gray-300 px-4 py-2">3</td>
-                  <td className="border border-gray-300 px-4 py-2">10</td>
-                  <td className="border border-gray-300 px-4 py-2">1.215</td>
-                  <td className="border border-gray-300 px-4 py-2">2.390</td>
-                  <td className="border border-gray-300 px-4 py-2">2.836</td>
-                </tr>
-                <tr>
-                  <td className="border border-gray-300 px-4 py-2">Guro I</td>
-                  <td className="border border-gray-300 px-4 py-2">1</td>
-                  <td className="border border-gray-300 px-4 py-2">6</td>
-                  <td className="border border-gray-300 px-4 py-2">579</td>
-                  <td className="border border-gray-300 px-4 py-2">573</td>
-                  <td className="border border-gray-300 px-4 py-2">510</td>
-                </tr>
-                <tr>
-                  <td className="border border-gray-300 px-4 py-2">
-                    Perum Green Garden
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2">5</td>
-                  <td className="border border-gray-300 px-4 py-2">19</td>
-                  <td className="border border-gray-300 px-4 py-2">1.470</td>
-                  <td className="border border-gray-300 px-4 py-2">1.475</td>
-                  <td className="border border-gray-300 px-4 py-2">1.404</td>
-                </tr>
-                <tr>
-                  <td className="border border-gray-300 px-4 py-2">
-                    Perum Bhakti Praja
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2">1</td>
-                  <td className="border border-gray-300 px-4 py-2">3</td>
-                  <td className="border border-gray-300 px-4 py-2">292</td>
-                  <td className="border border-gray-300 px-4 py-2">306</td>
-                  <td className="border border-gray-300 px-4 py-2">210</td>
-                </tr>
-                <tr>
-                  <td className="border bg-red-400 text-white border-red-500 px-4 py-2">
-                    Jumlah
-                  </td>
-                  <td className="border bg-red-400 text-white border-red-500 px-4 py-2">
-                    37
-                  </td>
-                  <td className="border bg-red-400 text-white border-red-500 px-4 py-2">
-                    114
-                  </td>
-                  <td className="border bg-red-400 text-white border-red-500 px-4 py-2">
-                    8.838
-                  </td>
-                  <td className="border bg-red-400 text-white border-red-500 px-4 py-2">
-                    10.537
-                  </td>
-                  <td className="border bg-red-400 text-white border-red-500 px-4 py-2">
-                    9.272
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+      {loading ? (
+        <div className="mt-10 h-screen">
+          <SpinnerLoad width={6} height={6} />
         </div>
-      </div>
+      ) : (
+        <div dangerouslySetInnerHTML={{ __html: data.data.content }}></div>
+      )}
     </>
   );
 };

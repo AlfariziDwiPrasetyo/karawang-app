@@ -46,6 +46,28 @@ const Sidebar = ({ children }) => {
             </Link>
           </li>
           <li>
+            <Link href={"/admin/penduduk"}>
+              <h3
+                className={`${
+                  pathname == "/admin/penduduk" ? "text-blue-600" : "text-black"
+                } text-sm `}
+              >
+                Geografis dan Penduduk
+              </h3>
+            </Link>
+          </li>
+          <li>
+            <Link href={"/admin/struktur"}>
+              <h3
+                className={`${
+                  pathname == "/admin/struktur" ? "text-blue-600" : "text-black"
+                } text-sm `}
+              >
+                Struktur
+              </h3>
+            </Link>
+          </li>
+          <li>
             <Link href={"/admin/categoryLayanan"}>
               <h3
                 className={`${

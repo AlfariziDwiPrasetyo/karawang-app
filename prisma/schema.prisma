@@ -19,6 +19,20 @@ model Banner {
   updatedAt  DateTime @updatedAt
 }
 
+model Struktur {
+  id         Int      @id @default(autoincrement())
+  url        String
+  publicId   String
+  createdAt  DateTime @default(now()) @db.Timestamp(6)
+  updatedAt  DateTime @updatedAt
+}
+
+model Penduduk {
+  id        Int       @id @default(autoincrement())
+  content   String @db.Text
+   createdAt DateTime  @default(now()) @db.Timestamp(6)
+  updatedAt DateTime  @updatedAt
+}
  
 
 model Post {
