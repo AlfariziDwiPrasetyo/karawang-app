@@ -10,6 +10,6 @@ export default async function moveUploadFile(file, folder) {
 
   await writeFile(path, buffer);
   const uploaded = await v2.uploader.upload(path, { folder: folder });
-  await rm(path);
+  // await rm(path);
   return uploaded;
 }
