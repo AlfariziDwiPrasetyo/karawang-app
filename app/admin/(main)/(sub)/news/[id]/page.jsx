@@ -206,7 +206,7 @@ export default function Page({ params }) {
             <Button type="submit" className="block mt-3" color="blue-gray">
               Submit
             </Button>
-            <Link href={"/admin/banner"}>
+            <Link href={"/admin/news"}>
               <Button type="button" className="block mt-3" color="blue-gray">
                 back
               </Button>
