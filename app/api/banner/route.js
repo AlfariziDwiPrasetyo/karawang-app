@@ -22,12 +22,11 @@ export async function POST(request) {
     const formData = await request.formData();
     const file = formData.get("file");
     const uploaded = await moveUploadFile(file, "banner");
-    console.log(uploaded);
 
     const banner = await prisma.banner.create({
       data: {
         url: uploaded.url,
-        originName: uploaded.original_filename,
+        originName: file.name,
         publicId: uploaded.public_id,
       },
     });
