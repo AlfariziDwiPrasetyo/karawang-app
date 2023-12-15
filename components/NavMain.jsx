@@ -55,10 +55,12 @@ const lembagaKemasyarakatanItems = [
   {
     title: "LPMK",
     description: "Halaman utama website.",
+    link: "/lpmk",
     icon: UserGroupIcon,
   },
   {
     title: "UMKM",
+    link: "/umkm",
     description: "Informasi mengenai profil kelurahan.",
     icon: UserGroupIcon,
   },
