@@ -1,6 +1,4 @@
-import { writeFile, rm, mkdir } from "fs/promises";
-import { createReadStream } from "fs";
-import { dirname, join } from "path";
+import streamifier from "streamifier";
 import v2 from "./cloudinary";
 import { Readable } from "stream";
 
@@ -22,7 +20,6 @@ export default async function moveUploadFile(file, folder) {
       }
     );
 
-    let str = Readable.from(buffer);
-    str.pipe(theTransformStream);
+    streamifier.createReadStream(buffer).pipe(theTransformStream);
   });
 }
