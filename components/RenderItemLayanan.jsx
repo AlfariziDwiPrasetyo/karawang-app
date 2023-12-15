@@ -74,20 +74,18 @@ export const RenderItems = React.forwardRef(({ item }, key) => {
       </div>
     </>
   ) : (
-    <Link href={`/layanan/${item.slug}`}>
-      <MenuItem>
-        <div>
-          <Typography as="div" variant="small" className="font-medium">
-            <ListItem
-              className="flex items-center gap-2 py-2 pr-4 font-bold text-gray-900"
-              selected={openMenu || isMobileMenuOpen}
-              onClick={() => setIsMobileMenuOpen((cur) => !cur)}
-            >
-              {item.name}
-            </ListItem>
-          </Typography>
-        </div>
-      </MenuItem>
-    </Link>
+    <MenuItem>
+      <div>
+        <Typography as="div" variant="small" className="font-medium">
+          <ListItem
+            className="flex items-center gap-2 py-2 pr-4 font-bold text-gray-900"
+            selected={openMenu || isMobileMenuOpen}
+            onClick={() => setIsMobileMenuOpen((cur) => !cur)}
+          >
+            {item.name}
+          </ListItem>
+        </Typography>
+      </div>
+    </MenuItem>
   );
 });

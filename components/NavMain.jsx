@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import NavListMenu from "./NavListMenu";
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { getLayananData } from "@/utils/getLayananData";
 import {
   Navbar,
