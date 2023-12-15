@@ -1,4 +1,4 @@
-import { writeFile, rm } from "fs/promises";
+import { writeFile, rm, mkdir } from "fs/promises";
 import { dirname, join } from "path";
 import v2 from "./cloudinary";
 
