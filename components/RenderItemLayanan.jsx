@@ -65,9 +65,9 @@ export const RenderItems = React.forwardRef(({ item }, key) => {
         <Collapse open={isMobileMenuOpen}>
           <div className="pl-3">
             {item.Layanan.map((layanan, key) => (
-              <Link key={key} href={`/layanan/${layanan.slug}`}>
+              <a key={key} href={`/layanan/${layanan.slug}`}>
                 <MenuItem>{layanan.name}</MenuItem>
-              </Link>
+              </a>
             ))}
           </div>
         </Collapse>

@@ -8,7 +8,7 @@ const Footer = () => {
       <div className="flex flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 bg-black text-white text-center md:justify-between">
         <Typography
           as="a"
-          href="#"
+          href="/"
           color="blue-gray"
           className="font-normal transition-colors hover:text-red-500 focus:text-red-500 text-white"
         >
@@ -18,7 +18,7 @@ const Footer = () => {
           <li>
             <Typography
               as="a"
-              href="#"
+              href="/about"
               color="blue-gray"
               className="font-normal transition-colors hover:text-red-500 focus:text-red-500 text-white"
             >
@@ -28,27 +28,7 @@ const Footer = () => {
           <li>
             <Typography
               as="a"
-              href="#"
-              color="blue-gray"
-              className="font-normal transition-colors hover:text-red-500 focus:text-red-500 text-white"
-            >
-              Lisensi
-            </Typography>
-          </li>
-          <li>
-            <Typography
-              as="a"
-              href="#"
-              color="blue-gray"
-              className="font-normal transition-colors hover:text-red-500 focus:text-red-500 text-white"
-            >
-              Kontribusi
-            </Typography>
-          </li>
-          <li>
-            <Typography
-              as="a"
-              href="#"
+              href="/kontak"
               color="blue-gray"
               className="font-normal transition-colors hover:text-red-500 focus:text-red-500 text-white"
             >

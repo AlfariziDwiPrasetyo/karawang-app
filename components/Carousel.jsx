@@ -1,27 +1,55 @@
 "use client";
 import { Carousel } from "@material-tailwind/react";
-import Image from "next/image";
+import { useEffect, useState } from "react";
+import SpinnerLoad from "./SpinnerLoad";
 
 export function CarouselComp() {
-  return (
+  const [data, setData] = useState({});
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    try {
+      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/banner`)
+        .then((res) => {
+          return res.json();
+        })
+        .then((bannerData) => {
+          setData(bannerData);
+          setLoading(false);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+  console.log(data);
+  return loading ? (
+    <div className="mt-5 flex items-center justify-center">
+      <SpinnerLoad width={12} height={12} />
+    </div>
+  ) : (
     <Carousel className="hidden z-0 lg:flex">
-      <Image
-        src="/banner.jpg"
-        alt="image 1"
-        className="h-full w-full object-cover"
-        width={500}
-        height={500}
-      />
-      <img
-        src="https://images.unsplash.com/photo-1518623489648-a173ef7824f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2762&q=80"
-        alt="image 2"
-        className="h-full w-full object-cover"
-      />
-      <img
-        src="https://images.unsplash.com/photo-1518623489648-a173ef7824f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2762&q=80"
-        alt="image 3"
-        className="h-full w-full object-cover"
-      />
+      {data.data.length > 1 ? (
+        data.data.map((url) => (
+          <div>
+            <img
+              src={`${url.url}`}
+              alt="image 1"
+              className="h-full w-full object-cover"
+              width={500}
+              height={500}
+            />
+          </div>
+        ))
+      ) : (
+        <div>
+          <img
+            src={`/banner.jpg`}
+            alt="image 1"
+            className="h-full w-full object-cover"
+            width={500}
+            height={500}
+          />
+        </div>
+      )}
     </Carousel>
   );
 }
