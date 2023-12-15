@@ -8,7 +8,7 @@ const page = ({ params: { slug } }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/layanan/${slug}`)
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/layanan/${slug}`)
       .then((res) => {
         return res.json();
       })
@@ -16,6 +16,9 @@ const page = ({ params: { slug } }) => {
         setData(newsData);
         setLoading(false);
         console.log({ newsData });
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }, [slug]);
 

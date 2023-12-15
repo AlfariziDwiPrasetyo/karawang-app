@@ -10,13 +10,16 @@ const Feed = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/news?page=1`)
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/news?page=1`)
       .then((res) => {
         return res.json();
       })
       .then((newsData) => {
         setData(newsData);
         setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }, []);
 

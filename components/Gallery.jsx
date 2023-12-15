@@ -9,7 +9,9 @@ const Gallery = () => {
 
   useEffect(() => {
     const fetchImageData = async () => {
-      const response = await fetch("http://localhost:3000/api/banner");
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/banner`
+      );
       const data = await response.json();
       setData(data);
       setLoading(false);
