@@ -53,7 +53,7 @@ export const RenderItems = React.forwardRef(({ item }, key) => {
             </div>
           </MenuItem>
         </MenuHandler>
-        <MenuList>
+        <MenuList className="max-h-80 overflow-y-auto">
           {item.Layanan.map((layanan, key) => (
             <Link key={key} href={`/layanan/${layanan.slug}`}>
               <MenuItem key={layanan.id}>{layanan.name}</MenuItem>
