@@ -2,7 +2,7 @@ const aboutMe = () => {
   return (
     <div className="mt-10 pl-10">
       <h1 className="font-bold text-3xl">Tentang Kami</h1>
-      <section className="pr-20 mr-20 mt-5">
+      <section className="md:pr-20 md:mr-20 mt-5">
         <p>
           Kami adalah bagian integral dari Kecamatan Karawang yang berdedikasi
           untuk melayani masyarakat dan memajukan kualitas hidup warga Nagasari.
