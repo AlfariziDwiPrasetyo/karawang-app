@@ -27,7 +27,7 @@ export function CarouselComp() {
     </div>
   ) : (
     <Carousel className="hidden z-0 lg:flex">
-      {data.data.length > 1 ? (
+      {data.data.length > 0 ? (
         data.data.map((url) => (
           <div>
             <img
