@@ -48,7 +48,7 @@ const Card = ({ image, title, content, id }) => {
                 <p>{removedTagContent(content)}</p>
               )}
               <a href={`/artikel/${id}`}>
-                <p className="text-red-300 text-sm">Read More ...</p>
+                <p className="text-red-300 text-sm">Read More</p>
               </a>
             </div>
           </div>
