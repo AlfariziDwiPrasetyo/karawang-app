@@ -22,8 +22,8 @@ export function CarouselComp() {
   }, []);
   console.log(data);
   return loading ? (
-    <div className="mt-5 flex items-center justify-center">
-      <SpinnerLoad width={12} height={12} />
+    <div className="mt-5 skeleton flex items-center w-full h-screen justify-center">
+      {/* <SpinnerLoad width={12} height={12} /> */}
     </div>
   ) : (
     <Carousel className="hidden z-0 lg:flex">

@@ -15,7 +15,7 @@ const DynamicPage = ({ title, content, image }) => {
         </div>
         <div className=" lg:ml-5 p-3 lg:px-1">
           <div
-            className="text-justify"
+            className="text-justify overflow-x-auto"
             dangerouslySetInnerHTML={{ __html: content }}
           ></div>
         </div>

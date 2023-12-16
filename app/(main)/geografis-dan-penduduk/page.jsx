@@ -27,11 +27,14 @@ const page = () => {
         Geografis dan Kependudukan
       </div>
       {loading ? (
-        <div className="mt-10 h-screen">
+        <div className="mt-10 flex items-center justify-center h-screen">
           <SpinnerLoad width={6} height={6} />
         </div>
       ) : (
-        <div dangerouslySetInnerHTML={{ __html: data.data?.content }}></div>
+        <div
+          className="px-20 mt-10 overflow-x-auto"
+          dangerouslySetInnerHTML={{ __html: data.data?.content }}
+        ></div>
       )}
     </>
   );
