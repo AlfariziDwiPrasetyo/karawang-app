@@ -26,10 +26,16 @@ const Feed = () => {
 
   return (
     <>
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center ">
         {loading ? (
-          <div className="mt-10 h-screen">
-            <SpinnerLoad width={6} height={6} />
+          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-7">
+            {/* <SpinnerLoad width={6} height={6} /> */}
+            <div className="skeleton w-80 h-64"></div>
+            <div className="skeleton w-80 h-64"></div>
+            <div className="skeleton w-80 h-64"></div>
+            <div className="skeleton w-80 h-64"></div>
+            <div className="skeleton w-80 h-64"></div>
+            <div className="skeleton w-80 h-64"></div>
           </div>
         ) : (
           <>

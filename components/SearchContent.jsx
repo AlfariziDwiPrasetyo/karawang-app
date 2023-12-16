@@ -25,7 +25,7 @@ const SearchContent = ({ data }) => {
         ) : (
           <p>{removedTagContent(item.content)}</p>
         )}
-        <p className="text-sm">{`https://karawangnagasari.com${
+        <p className="text-sm">{`https://nagasarikarawang.com${
           item.type === "layanan"
             ? `/layanan/${item.url}`
             : `/artikel/${item.id}`
