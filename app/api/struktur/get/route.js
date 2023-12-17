@@ -1,6 +1,8 @@
 import prisma from "@/helper/prismaInit";
 import { NextResponse } from "next/server";
-// dfasss
+
+export const dynamic = "force-dynamic"; // defaults to force-static
+
 export async function GET(request) {
   try {
     const user = await prisma.struktur.findFirstOrThrow();
