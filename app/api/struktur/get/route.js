@@ -1,10 +1,10 @@
 import prisma from "@/helper/prismaInit";
 import { NextResponse } from "next/server";
-
+// dfasss
 export async function GET(request) {
   try {
     const user = await prisma.struktur.findFirstOrThrow();
-
+    console.log(user);
     return NextResponse.json({
       success: true,
       data: user,
