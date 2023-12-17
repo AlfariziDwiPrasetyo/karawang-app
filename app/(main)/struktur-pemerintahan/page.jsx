@@ -32,15 +32,17 @@ const page = () => {
             Struktur Pemerintahan
           </div>
           <div className="mt-12 text-center">
-            <h1 className="font-bold text-2xl px-4">
+            <h1 className="font-bold text-md lg:text-2xl px-4">
               Struktur pemerintahan kelurahan Nagasari
             </h1>
-            <h1 className="font-bold text-2xl px-4 p-1">
+            <h1 className="font-bold text-md lg:text-2xl px-4 p-1">
               Kecamatan Karawang Barat
             </h1>
-            <h1 className="font-bold text-2xl px-4 p-1">Kabupaten Karawang</h1>
-            <div className="flex items-center justify-center">
-              <img src={data.data.url} className="w-6/12" alt="" />
+            <h1 className="font-bold text-md lg:text-2xl px-4 p-1">
+              Kabupaten Karawang
+            </h1>
+            <div className="flex items-center mb-20 justify-center">
+              <img src={data.data.url} className="w-full" alt="" />
             </div>
           </div>
         </>
