@@ -51,7 +51,7 @@ const NavSearch = () => {
             </>
           )}
         </div>
-        <div className="md:flex hidden items-center">
+        <div className="flex items-center">
           <form action="" onSubmit={handleOnSubmit}>
             <input
               type="text"
