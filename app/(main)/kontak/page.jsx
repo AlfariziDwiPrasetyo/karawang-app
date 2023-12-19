@@ -2,7 +2,10 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { FaInstagram } from "react-icons/fa";
+
 import SpinnerLoad from "@/components/SpinnerLoad";
+import Link from "next/link";
 
 const page = () => {
   const [formData, setFormData] = useState({
@@ -71,10 +74,16 @@ const page = () => {
         ) : (
           <>
             <h1 className="text-4xl font-medium">Kontak kami</h1>
+
             <p className="mt-3">
               Email kami ke <span className="font-bold">{data.data.email}</span>{" "}
               atau kirim pesan kami disini :
             </p>
+            <Link href={"https://www.instagram.com/kel_nagasari.karbar"}>
+              <span className="flex items-center gap-2">
+                <FaInstagram /> kel_nagasari.karbar
+              </span>
+            </Link>
             <form className="mt-10" onSubmit={handleSubmit}>
               {/* <input type="hidden" name="access_key" value="" /> */}
 
